@@ -16,38 +16,39 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-//#include <QtCore/QtPlugin>
+import QtQuick 2.1
 
-//#include "widgets/application/TanoApplication.h"
-#include "quick/ApplicationWindow.h"
+import "../fonts/fontawesome-webfont.js" as FontAwesome
 
-#include <QtGui/QGuiApplication>
+import "../common/buttons"
 
-#include <vlc-qt/QmlVideoPlayer.h>
+FocusScope {
+    property alias interactive: gridView.interactive
 
-//Q_IMPORT_PLUGIN(TanoConfig)
+    width: 100
+    height: 100
 
-int main(int argc, char *argv[])
-{
-    //Q_INIT_RESOURCE(qml);
+    /*onActiveFocusChanged: {
 
-    qmlRegisterType<VlcQmlVideoPlayer>("VLCQt", 0, 9, "VlcVideoPlayer");
+    }*/
 
-    //if (!TanoApplication::preInit(argc, argv))
-    //    return -10;
+    GridView {
+        id: gridView
+        anchors.fill: parent;
+        cellWidth: 60; cellHeight: 60
+        /*focus: true*/
+        model: OsdButtonsModel { }
 
-    QGuiApplication instance(argc, argv);
-    // Is another instance of the program is already running
-    //if (!instance.shouldContinue())
-    //    return 0;
+        KeyNavigation.up: osdPlaylist
+        KeyNavigation.down: osdPlaylist
 
-    //if (!instance.postInit())
-    //    return -10;
+        delegate: SquareButton {
+            id: container
+            anchors.margins: 5
+            width: GridView.view.cellWidth - 10; height: GridView.view.cellHeight - 10
 
-    ApplicationWindow main; //instance.arguments());
-
-    //QObject::connect(&instance, &TanoApplication::activate(), &main, );
-    //QObject::connect(&instance, SIGNAL(dockClicked()), &main, SLOT(dockClicked()));
-
-    return instance.exec();
+            icon: FontAwesome.Icon[model.icon]
+            iconColor: model.color
+        }
+    }
 }

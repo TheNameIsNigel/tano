@@ -1,0 +1,99 @@
+/****************************************************************************
+* Tano - An Open IP TV Player
+* Copyright (C) 2014 Tadej Novak <tadej@tano.si>
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program. If not, see <http://www.gnu.org/licenses/>.
+*****************************************************************************/
+
+#include <QtCore/QDebug>
+#include <QtCore/QString>
+#include <QtQml/QQmlContext>
+
+#include "core/playlist/PlaylistFilterModel.h"
+#include "core/settings/Settings.h"
+
+#include "common/Constants.h"
+#include "elements/PlaylistElement.h"
+
+#include "ApplicationWindow.h"
+
+ApplicationWindow::ApplicationWindow(QObject *parent)
+    : QQmlApplicationEngine(parent)
+{
+    createSettings();
+    createSettingsStartup();
+    createCommonConstants();
+    createModels();
+
+    load(QUrl(QStringLiteral("/Users/tadej/workspace/tanoprojects/tano/src/quick/qml/main.qml"))); //"qrc:/main.qml")));
+}
+
+ApplicationWindow::~ApplicationWindow()
+{
+
+}
+
+void ApplicationWindow::createSettings()
+{
+    QScopedPointer<Settings> settings(new Settings(this));
+    _hideToTray = settings->trayEnabled() ? settings->hideToTray() : false;
+
+    //GUI Settings
+    /*if (_trayIcon) {
+        if(settings->trayEnabled())
+            _trayIcon->show();
+        else
+            _trayIcon->hide();
+    }*/
+
+    _rememberGui = settings->rememberGuiSession();
+
+    //Playback settings
+    //_mediaPlayer->createSettings();
+    //_udpxy->createSettings();
+    _muteOnMinimize = settings->muteOnMinimize();
+
+    qDebug() << "Initialised: Settings";
+}
+
+void ApplicationWindow::createSettingsStartup()
+{
+    QScopedPointer<Settings> settings(new Settings(this));
+    _defaultPlaylist = settings->playlist();
+    //if (!_arguments->value(Argument::Playlist).isEmpty())
+    //    _defaultPlaylist = _arguments->value(Argument::Playlist);
+
+    _width = settings->width();
+    _height = settings->height();
+    _posX = settings->posX();
+    _posY = settings->posY();
+
+    if (_rememberGui) {
+        //resize(_width, _height);
+    }
+
+    qDebug() << "Initialised: Startup settings";
+}
+
+void ApplicationWindow::createCommonConstants()
+{
+    rootContext()->setContextProperty("TanoCommon", Tano::Quick::common());
+    rootContext()->setContextProperty("TanoUi", Tano::Quick::ui());
+}
+
+void ApplicationWindow::createModels()
+{
+    _playlist = new PlaylistElement(_defaultPlaylist, this);
+    rootContext()->setContextProperty("TanoPlaylist", _playlist->model());
+}

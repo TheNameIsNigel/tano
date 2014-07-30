@@ -85,7 +85,7 @@ ENDIF()
 
 # This line tells cmake to create the Tano program.
 ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE WIN32 ${Tano_Srcs})
-ADD_DEPENDENCIES(${PROJECT_NAME} ${TANO_CORE} ${TANO_WIDGETS} ${TANO_CONFIG})
+ADD_DEPENDENCIES(${PROJECT_NAME} ${TANO_CORE} ${TANO_QUICK} ${TANO_WIDGETS} ${TANO_CONFIG})
 
 # MSVC: Avoid Debug/Release/... subfolders
 IF(MSVC)
@@ -111,10 +111,9 @@ IF(STATIC)
     TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${LIBVLCQT_LIBRARY} ${LIBVLCQT_WIDGETS_LIBRARY})
 ENDIF()
 
-
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-                      Qt5::Concurrent Qt5::Gui Qt5::Network Qt5::PrintSupport Qt5::Sql Qt5::Widgets Qt5::Xml
-                      ${TANO_CORE_LIB} ${TANO_WIDGETS_LIB} ${TANO_CONFIG_LIB})
+                      Qt5::Concurrent Qt5::Gui Qt5::Network Qt5::PrintSupport Qt5::Quick Qt5::Sql Qt5::Widgets Qt5::Xml
+                      ${TANO_CORE_LIB} ${TANO_QUICK_LIB} ${TANO_WIDGETS_LIB} ${TANO_CONFIG_LIB} ${LIBVLCQT_QML_LIBRARY})
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin" AND NOT STATIC)
     ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
