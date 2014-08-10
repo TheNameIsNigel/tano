@@ -16,30 +16,24 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-import QtQuick 2.0
-import VLCQt 0.9
+#ifndef TANO_EPGELEMENT_H_
+#define TANO_EPGELEMENT_H_
 
-Rectangle {
-    id: playerVideo
-    width: 854
-    height: 480
-    color: "#000000"
+#include <QtCore/QObject>
 
-    /*Image {
-        id: tempVideo
-        anchors.fill: parent
-        fillMode: Image.PreserveAspectFit
-        source: "../img/video.jpg"
-    }*/
+class XmltvManager;
 
-    VlcVideoPlayer {
-        id: player
-        anchors.fill: parent
-        //url: "http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_640x360.m4v"
+class EpgElement : public QObject
+{
+Q_OBJECT
+public:
+    explicit EpgElement(QObject *parent = 0);
+    virtual ~EpgElement();
 
-        url: "/Users/tadej/Movies/BBB720p.avi"
-        autoplay: false
+    inline XmltvManager *xmltv() { return _xmltv; }
 
-        Component.onCompleted: mainWindow.player = player
-    }
-}
+private:
+    XmltvManager *_xmltv;
+};
+
+#endif // TANO_EPGELEMENT_H_

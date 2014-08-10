@@ -32,6 +32,10 @@ QQmlPropertyMap *Tano::Quick::common()
 QQmlPropertyMap *Tano::Quick::ui()
 {
     QQmlPropertyMap *uiConstantsData = new QQmlPropertyMap();
+    // Colors
+    uiConstantsData->insert("colorBlurBg", "#80232323");
+    uiConstantsData->insert("colorBlurBgDark", "#d0232323");
+
     // OSD
     uiConstantsData->insert("osdLRMargin", 100);
     uiConstantsData->insert("osdTBMargin", 25);

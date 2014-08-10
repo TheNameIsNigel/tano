@@ -38,6 +38,8 @@ Channel::Channel(const QString &name,
     _categories = QStringList();
     _logo = "";
     _passwordProtected = false;
+    _currentEpg = "";
+    _currentEpgId = "";
 }
 
 Channel::~Channel() { }
@@ -57,6 +59,8 @@ QHash<int, QByteArray> Channel::roleNames() const
     names[CategoriesRole] = "categories";
     names[LogoRole] = "logo";
     names[ProtectedRole] = "protected";
+    names[CurrentEpgRole] = "currentEpg";
+    names[CurrentEpgIdRole] = "currentEpgId";
     return names;
 }
 
@@ -94,6 +98,10 @@ QVariant Channel::data(int role) const
         return logo();
     case ProtectedRole:
         return passwordProtected();
+    case CurrentEpgRole:
+        return currentEpg();
+    case CurrentEpgIdRole:
+        return currentEpgId();
     default:
         return QVariant();
     }
@@ -182,6 +190,22 @@ void Channel::setPasswordProtected(bool pprotected)
 {
     if (_passwordProtected != pprotected) {
         _passwordProtected = pprotected;
+        emit dataChanged();
+    }
+}
+
+void Channel::setCurrentEpg(const QString &epg)
+{
+    if (_currentEpg != epg) {
+        _currentEpg = epg;
+        emit dataChanged();
+    }
+}
+
+void Channel::setCurrentEpgId(const QString &epg)
+{
+    if (_currentEpgId != epg) {
+        _currentEpgId = epg;
         emit dataChanged();
     }
 }

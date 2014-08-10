@@ -21,6 +21,7 @@
 
 #include <QtCore/QObject>
 
+class ChannelSelect;
 class PlaylistFilterModel;
 class PlaylistModel;
 class PlaylistUpdate;
@@ -34,6 +35,7 @@ public:
     virtual ~PlaylistElement();
 
     inline PlaylistFilterModel *model() { return _filterModel; }
+    inline PlaylistModel *sourceModel() { return _model; }
 
 public slots:
     void openPlaylist(bool start = false);
@@ -42,13 +44,12 @@ private slots:
     void openPlaylistComplete();
 
 private:
-    QObject *_select;
-
     // Playlist
     QString _defaultPlaylist;
     PlaylistModel *_model;
     PlaylistFilterModel *_filterModel;
     PlaylistUpdate *_modelUpdate;
+    ChannelSelect *_select;
     QString _playlistName;
     bool _hasPlaylist;
 };

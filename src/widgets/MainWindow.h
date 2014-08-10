@@ -37,7 +37,6 @@ class QWidgetAction;
 
 class Arguments;
 class Channel;
-class ChannelSelect;
 class DesktopShortcuts;
 class NetworkDownload;
 class LocaleManager;
@@ -155,7 +154,6 @@ private:
 
     //Main
     Arguments *_arguments;
-    ChannelSelect *_select;
     LocaleManager *_locale;
     MediaPlayer *_mediaPlayer;
     PlaylistModel *_model;

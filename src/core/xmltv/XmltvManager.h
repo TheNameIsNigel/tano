@@ -60,6 +60,9 @@ public slots:
 signals:
     void channelsChanged(const QHash<QString, QString> &);
     void current(const QStringList &epg);
+    void currentPlaylist(const QString &id,
+                         const QString &epg,
+                         const QString &epgId);
     void schedule(const QString &,
                   XmltvProgrammeModel *);
     void programme(XmltvProgramme *);
@@ -67,6 +70,7 @@ signals:
 
 private slots:
     void current();
+    void currentPlaylist();
     void loadXmltv();
     void loadXmltvInit(QFile *file);
     void loadXmltvFinish();
@@ -81,6 +85,7 @@ private:
     QPointer<QFile> _file;
     XmltvHandler *_handler;
     QTimer *_timer;
+    QTimer *_playlistTimer;
     QFutureWatcher<bool> *_watcher;
 };
 

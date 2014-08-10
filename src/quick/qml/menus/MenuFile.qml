@@ -17,29 +17,20 @@
 *****************************************************************************/
 
 import QtQuick 2.0
-import VLCQt 0.9
+import QtQuick.Controls 1.2
 
-Rectangle {
-    id: playerVideo
-    width: 854
-    height: 480
-    color: "#000000"
+Menu {
+    title: qsTr("File")
 
-    /*Image {
-        id: tempVideo
-        anchors.fill: parent
-        fillMode: Image.PreserveAspectFit
-        source: "../img/video.jpg"
-    }*/
+    MenuItem { text: qsTr("Open File") }
+    MenuItem { text: qsTr("Open URL") }
 
-    VlcVideoPlayer {
-        id: player
-        anchors.fill: parent
-        //url: "http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_640x360.m4v"
+    MenuSeparator { }
 
-        url: "/Users/tadej/Movies/BBB720p.avi"
-        autoplay: false
+    MenuItem { text: qsTr("Full schedules") }
+    MenuItem { text: qsTr("Current show info") }
 
-        Component.onCompleted: mainWindow.player = player
-    }
+    MenuSeparator { }
+
+    MenuItem { text: qsTr("Exit") }
 }

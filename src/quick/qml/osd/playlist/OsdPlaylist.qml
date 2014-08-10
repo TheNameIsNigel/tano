@@ -18,18 +18,23 @@
 
 import QtQuick 2.0
 
+import "../../common/rectangles"
 import "../../common/views"
 
 FocusScope {
     width: 350; height: 200
 
+    clip: true
+
     anchors.left: parent.right
     anchors.leftMargin: 0
 
-    Rectangle {
-        id: shade
+    VideoBlur {
         anchors.fill: parent
-        color: "#ee232323"
+
+        type: "right"
+        dark: true
+        marginRight: osdPlaylist.width + osdPlaylist.anchors.leftMargin
     }
 
     ListView {
@@ -53,6 +58,7 @@ FocusScope {
 
     ScrollBar {
         flickable: listView
+        anchors.leftMargin: 3
     }
 
     states: State {

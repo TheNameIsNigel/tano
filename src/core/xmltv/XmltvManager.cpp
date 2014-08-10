@@ -46,6 +46,10 @@ XmltvManager::XmltvManager(QObject *parent)
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(current()));
 
+    _playlistTimer = new QTimer(this);
+    connect(_playlistTimer, SIGNAL(timeout()), this, SLOT(currentPlaylist()));
+    _playlistTimer->start(10000);
+
     _watcher = new QFutureWatcher<bool>(this);
     connect(_watcher, SIGNAL(finished()), this, SLOT(loadXmltvFinish()));
 
@@ -60,6 +64,7 @@ XmltvManager::~XmltvManager()
         delete _file;
     delete _handler;
     delete _timer;
+    delete _playlistTimer;
     delete _watcher;
 }
 
@@ -73,6 +78,18 @@ void XmltvManager::current()
     emit current(_db->programmeCurrentDisplay(_currentXmltvId));
 
     _timer->start(60000);
+}
+
+void XmltvManager::currentPlaylist()
+{
+    QHash<QString, QString> list = channels();
+    foreach (QString id, list.values()) {
+        XmltvProgramme *p = _db->programmeCurrent(id);
+        if (p) {
+            emit currentPlaylist(id, p->title(), p->id());
+            delete p;
+        }
+    }
 }
 
 void XmltvManager::loadXmltv()

@@ -74,6 +74,11 @@ public:
 
     bool validate() const;
 
+public slots:
+    void updateCurrentEpg(const QString &id,
+                          const QString &epg,
+                          const QString &epgId);
+
 private:
     void processChannel(Channel *channel);
 

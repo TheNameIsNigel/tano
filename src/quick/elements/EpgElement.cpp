@@ -16,30 +16,18 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-import QtQuick 2.0
-import VLCQt 0.9
+#include "core/xmltv/XmltvManager.h"
 
-Rectangle {
-    id: playerVideo
-    width: 854
-    height: 480
-    color: "#000000"
+#include "elements/EpgElement.h"
 
-    /*Image {
-        id: tempVideo
-        anchors.fill: parent
-        fillMode: Image.PreserveAspectFit
-        source: "../img/video.jpg"
-    }*/
+EpgElement::EpgElement(QObject *parent)
+    : QObject(parent),
+      _xmltv(new XmltvManager())
+{
 
-    VlcVideoPlayer {
-        id: player
-        anchors.fill: parent
-        //url: "http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_640x360.m4v"
+}
 
-        url: "/Users/tadej/Movies/BBB720p.avi"
-        autoplay: false
+EpgElement::~EpgElement()
+{
 
-        Component.onCompleted: mainWindow.player = player
-    }
 }

@@ -26,7 +26,7 @@ Item {
 
     Rectangle {
         id: rectangleLight
-        color: "#353535"
+        color: "#20CBCBCB"
 
         anchors {
             fill: parent
@@ -35,7 +35,7 @@ Item {
 
         Rectangle {
             id: rectangleDark
-            color: "#2b2b2b"
+            color: "#20D4D4D4"
 
             width: parent.height
             anchors {
@@ -48,9 +48,9 @@ Item {
                 id: image
                 fillMode: Image.PreserveAspectFit
                 width: parent.height
-                anchors.margins: 5
+                anchors.margins: 1
                 anchors.fill: parent
-                source: "../../img/logo.png"
+                source: model.logo
             }
         }
 
@@ -65,7 +65,7 @@ Item {
                 id: textNumber
                 color: "#ffffff"
                 text: number
-                font.pointSize: 19
+                font.pointSize: 20
                 verticalAlignment: Text.AlignVCenter
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
@@ -93,7 +93,7 @@ Item {
 
             Text {
                 color: "#ffffff"
-                text: "Game of Thrones"
+                text: model.currentEpg
                 font.pointSize: 14
                 verticalAlignment: Text.AlignVCenter
                 anchors.left: parent.left

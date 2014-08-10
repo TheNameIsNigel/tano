@@ -21,9 +21,12 @@
 #include <QtQml/QQmlContext>
 
 #include "core/playlist/PlaylistFilterModel.h"
+#include "core/playlist/PlaylistModel.h"
 #include "core/settings/Settings.h"
+#include "core/xmltv/XmltvManager.h"
 
 #include "common/Constants.h"
+#include "elements/EpgElement.h"
 #include "elements/PlaylistElement.h"
 
 #include "ApplicationWindow.h"
@@ -94,6 +97,10 @@ void ApplicationWindow::createCommonConstants()
 
 void ApplicationWindow::createModels()
 {
+    _epg = new EpgElement(this);
+
     _playlist = new PlaylistElement(_defaultPlaylist, this);
     rootContext()->setContextProperty("TanoPlaylist", _playlist->model());
+
+    connect(_epg->xmltv(), SIGNAL(currentPlaylist(QString, QString, QString)), _playlist->sourceModel(), SLOT(updateCurrentEpg(QString, QString, QString)));
 }

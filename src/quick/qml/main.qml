@@ -20,9 +20,8 @@ import QtQuick 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.1
 
+import "menus"
 import "player"
-
-import "js/main.js" as JSMain
 
 ApplicationWindow {
     id: mainWindow
@@ -42,15 +41,7 @@ ApplicationWindow {
         source: "fonts/fontawesome-webfont.ttf"
     }
 
-    menuBar: MenuBar {
-        Menu { MenuItem { text: "File" } }
-    }
-
-    statusBar: StatusBar {
-        RowLayout {
-            Label { text: "Test status message" }
-        }
-    }
+    menuBar: MainMenuBar { }
 
     Timer {
         id: mouseTimer

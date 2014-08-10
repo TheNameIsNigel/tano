@@ -20,17 +20,29 @@ import QtQuick 2.1
 import QtGraphicalEffects 1.0
 
 Item {
+    property string type: "bottom"
+    property bool dark: false
+
+    property int marginTop: 0
     property int marginBottom: 0
+    property int marginLeft: 0
+    property int marginRight: 0
 
     FastBlur {
         id: blur
         anchors {
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
+            top: type === "bottom" ? undefined : parent.top;
+            bottom: type === "top" ? undefined : parent.bottom
+            left: type === "right" ? undefined : parent.left
+            right: type === "left" ? undefined : parent.right
+
+            topMargin: marginTop
             bottomMargin: marginBottom
+            leftMargin: marginLeft
+            rightMargin: marginRight
         }
 
+        width: video.width
         height: video.height
         source: video
         radius: 32
@@ -38,6 +50,6 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        color: "#60000000"
+        color: dark ? TanoUi.colorBlurBgDark : TanoUi.colorBlurBg
     }
 }

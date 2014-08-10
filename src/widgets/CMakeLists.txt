@@ -82,7 +82,6 @@ ENDIF()
 SET(Tano_Widgets_Common_Srcs
     common/Backend.cpp
     common/BrowseWidget.cpp
-    common/ChannelSelect.cpp
     common/DesktopShortcuts.cpp
     common/FileDialogs.cpp
     common/InfoBarWidget.cpp

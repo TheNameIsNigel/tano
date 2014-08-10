@@ -60,7 +60,6 @@
 
 #include "application/Notifications.h"
 #include "common/Backend.h"
-#include "common/ChannelSelect.h"
 #include "common/DesktopShortcuts.h"
 #include "common/FileDialogs.h"
 #include "common/OsdFloat.h"
@@ -88,7 +87,6 @@ MainWindow::MainWindow(Arguments *args)
       ui(new Ui::MainWindow),
       _hasPlaylist(false),
       _isLite(false),
-      _select(0),
       _locale(new LocaleManager()),
       _model(new PlaylistModel(this)),
       _modelUpdate(new PlaylistUpdate(_model)),
@@ -240,7 +238,7 @@ bool MainWindow::eventFilter(QObject *obj,
         if (_wheelType == "volume") {
             _mediaPlayer->osd()->volumeSlider()->volumeControl(wheel);
         } else {
-            _select->channel(wheel);
+            //_select->channel(wheel);
         }
     }
 
@@ -705,12 +703,12 @@ void MainWindow::stop()
 // Open dialogs
 void MainWindow::openPlaylist(bool start)
 {
-    if (_select != 0) {
+    /*if (_select != 0) {
         disconnect(ui->actionBack, SIGNAL(triggered()), _select, SLOT(back()));
         disconnect(ui->actionNext, SIGNAL(triggered()), _select, SLOT(next()));
         disconnect(_select, SIGNAL(channelSelect(int)), _playlistTab->playlist(), SLOT(channelSelected(int)));
         delete _select;
-    }
+    }*/
 
     if (!start) {
         _playlistName = FileDialogs::openPlaylistSimple();
@@ -743,10 +741,10 @@ void MainWindow::openPlaylistComplete()
 
     _hasPlaylist = true;
 
-    _select = new ChannelSelect(this, _mediaPlayer->osd()->lcd(), _model->numbers());
+    /*_select = new ChannelSelect(this, _mediaPlayer->osd()->lcd(), _model->numbers());
     connect(ui->actionBack, SIGNAL(triggered()), _select, SLOT(back()));
     connect(ui->actionNext, SIGNAL(triggered()), _select, SLOT(next()));
-    connect(_select, SIGNAL(channelSelect(int)), _playlistTab->playlist(), SLOT(channelSelected(int)));
+    connect(_select, SIGNAL(channelSelect(int)), _playlistTab->playlist(), SLOT(channelSelected(int)));*/
 
     _playlistTab->setPlaylistName(_model->name());
     _playlistTab->setFilters(_model->categories(), _model->languages());

@@ -25,15 +25,16 @@
 
 #include "widgets/common/FileDialogs.h"
 
+#include "common/ChannelSelect.h"
 #include "elements/PlaylistElement.h"
 
 PlaylistElement::PlaylistElement(const QString &defaultPlaylist,
                                  QObject *parent)
     : QObject(parent),
-      _select(0),
       _defaultPlaylist(defaultPlaylist),
       _model(new PlaylistModel(this)),
       _modelUpdate(new PlaylistUpdate(_model)),
+      _select(0),
       _hasPlaylist(false)
 {
     _filterModel = new PlaylistFilterModel(this);
@@ -51,9 +52,10 @@ PlaylistElement::~PlaylistElement()
 void PlaylistElement::openPlaylist(bool start)
 {
     if (_select != 0) {
-        //disconnect(ui->actionBack, SIGNAL(triggered()), _select, SLOT(back()));
-        //disconnect(ui->actionNext, SIGNAL(triggered()), _select, SLOT(next()));
-        //disconnect(_select, SIGNAL(channelSelect(int)), _playlistTab->playlist(), SLOT(channelSelected(int)));
+        // TODO: select
+        /*disconnect(ui->actionBack, SIGNAL(triggered()), _select, SLOT(back()));
+        disconnect(ui->actionNext, SIGNAL(triggered()), _select, SLOT(next()));
+        disconnect(_select, SIGNAL(channelSelect(int)), _playlistTab->playlist(), SLOT(channelSelected(int)));*/
         delete _select;
     }
 
@@ -88,8 +90,9 @@ void PlaylistElement::openPlaylistComplete()
 
     _hasPlaylist = true;
 
-    /*_select = new ChannelSelect(this, _mediaPlayer->osd()->lcd(), _model->numbers());
-    connect(ui->actionBack, SIGNAL(triggered()), _select, SLOT(back()));
+    _select = new ChannelSelect(this, _model->numbers());
+    // TODO: Select
+    /*connect(ui->actionBack, SIGNAL(triggered()), _select, SLOT(back()));
     connect(ui->actionNext, SIGNAL(triggered()), _select, SLOT(next()));
     connect(_select, SIGNAL(channelSelect(int)), _playlistTab->playlist(), SLOT(channelSelected(int)));*/
 

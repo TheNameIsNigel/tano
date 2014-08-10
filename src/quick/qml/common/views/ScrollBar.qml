@@ -28,7 +28,7 @@ Rectangle {
         bottom: flickable.bottom
     }
 
-    color: "#22ffffff"
+    color: "#20ffffff"
 
     property Flickable flickable    : null;
     property int       handleSize   : 5;

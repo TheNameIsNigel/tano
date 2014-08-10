@@ -1,6 +1,6 @@
 /****************************************************************************
 * Tano - An Open IP TV Player
-* Copyright (C) 2012 Tadej Novak <tadej@tano.si>
+* Copyright (C) 2014 Tadej Novak <tadej@tano.si>
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -21,15 +21,13 @@
 
 #include <QtCore/QTimer>
 
-class QLCDNumber;
 class QShortcut;
 
 class ChannelSelect : public QObject
 {
 Q_OBJECT
 public:
-    ChannelSelect(QWidget *parent,
-                  QLCDNumber *number,
+    ChannelSelect(QObject *parent,
                   const QList<int> &list);
     ~ChannelSelect();
 
@@ -40,7 +38,6 @@ public slots:
 
 private slots:
     void display();
-    void keyPressed();
 
 signals:
     void channelSelect(const int);
@@ -49,14 +46,12 @@ private:
     void process(int key);
 
     QList<int> _channels;
-    QList<QShortcut *> _key;
-    QLCDNumber *_lcd;
     QTimer *_timer;
 
+    int _current;
     int _digit;
     int _full;
     int _number[3];
-    int _old;
 };
 
 #endif // TANO_CHANNELSELECT_H_

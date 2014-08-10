@@ -63,7 +63,7 @@ Rectangle {
 
             PropertyChanges {
                 target: rectangle
-                color: "#66ffffff"
+                color: "#60ffffff"
             }
         }
     ]

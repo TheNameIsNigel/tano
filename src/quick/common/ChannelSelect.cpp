@@ -16,22 +16,13 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#if defined(Qt5)
-    #include <QtWidgets/QLCDNumber>
-    #include <QtWidgets/QShortcut>
-#elif defined(Qt4)
-    #include <QtGui/QLCDNumber>
-    #include <QtGui/QShortcut>
-#endif
-
 #include "ChannelSelect.h"
 
-ChannelSelect::ChannelSelect(QWidget *parent,
-                             QLCDNumber *number,
+ChannelSelect::ChannelSelect(QObject *parent,
                              const QList<int> &list)
     : QObject(parent),
       _channels(list),
-      _lcd(number),
+      _current(1),
       _digit(1)
 {
     _timer = new QTimer(parent);
@@ -40,24 +31,17 @@ ChannelSelect::ChannelSelect(QWidget *parent,
     _number[1] = 0;
     _number[2] = 0;
 
-    for(int i = 0; i < 10; i++) {
-        _key.append(new QShortcut(QKeySequence(QString().number(i)), parent, 0, 0, Qt::ApplicationShortcut));
-        connect(_key[i], SIGNAL(activated()), this, SLOT(keyPressed()));
-    }
-
     connect(_timer, SIGNAL(timeout()), this, SLOT(display()));
 }
 
 ChannelSelect::~ChannelSelect()
 {
     delete _timer;
-    qDeleteAll(_key);
 }
 
 void ChannelSelect::process(int key)
 {
     if(_digit == 1) {
-        _old = _lcd->intValue();
         _number[0] = key;
     } else if(_digit == 2) {
         _number[1] = _number[0];
@@ -69,7 +53,9 @@ void ChannelSelect::process(int key)
     }
 
     _full = _number[2]*100 + _number[1]*10 + _number[0];
-    _lcd->display(_full);
+
+    // TODO: Display
+    //_lcd->display(_full);
 
     if(_digit < 3) {
         _timer->start(1000);
@@ -81,10 +67,11 @@ void ChannelSelect::process(int key)
 
 void ChannelSelect::display()
 {
-    if(_channels.contains(_full))
+    if(_channels.contains(_full)) {
         emit channelSelect(_full);
-    else
-        _lcd->display(_old);
+    } else {
+        // TODO: _lcd->display(_old);
+    }
 
     _number[0] = 0;
     _number[1] = 0;
@@ -97,12 +84,11 @@ void ChannelSelect::channel(bool direction)
 {
     int i = 0;
 
-    _old = _lcd->intValue();
     if(direction) {
-        _full = _old + 1;
+        _full = _current + 1;
         i = 1;
     } else {
-        _full = _old - 1;
+        _full = _current - 1;
         i = -1;
     }
 
@@ -110,10 +96,4 @@ void ChannelSelect::channel(bool direction)
         _full += i;
 
     display();
-}
-
-void ChannelSelect::keyPressed()
-{
-    QShortcut *tmp = qobject_cast<QShortcut *>(sender());
-    process(tmp->key().toString().toInt());
 }

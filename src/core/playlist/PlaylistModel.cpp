@@ -183,6 +183,18 @@ Channel *PlaylistModel::xmltvId(const QString &xmltvId)
     return 0;
 }
 
+void PlaylistModel::updateCurrentEpg(const QString &id,
+                                     const QString &epg,
+                                     const QString &epgId)
+{
+    Channel *channel = xmltvId(id);
+    if (!channel)
+        return;
+
+    channel->setCurrentEpg(epg);
+    channel->setCurrentEpgId(epgId);
+}
+
 void PlaylistModel::open(const QString &file,
                          bool refresh,
                          const File::Type &type,

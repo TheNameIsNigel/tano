@@ -52,7 +52,9 @@ public:
         XmltvIdRole,
         CategoriesRole,
         LogoRole,
-        ProtectedRole
+        ProtectedRole,
+        CurrentEpgRole,
+        CurrentEpgIdRole
     };
 
     /*!
@@ -190,6 +192,28 @@ public:
     void setPasswordProtected(bool pprotected);
 
     /*!
+        \brief Get current EPG name
+        \return current EPG name (QString)
+    */
+    inline QString currentEpg() const { return _currentEpg; }
+    /*!
+        \brief Set current EPG name
+        \param epg current EPG name (QString)
+    */
+    void setCurrentEpg(const QString &epg);
+
+    /*!
+        \brief Get current EPG ID
+        \return current EPG ID (QString)
+    */
+    inline QString currentEpgId() const { return _currentEpgId; }
+    /*!
+        \brief Set current EPG ID
+        \param epg current EPG ID (QString)
+    */
+    void setCurrentEpgId(const QString &epg);
+
+    /*!
         \brief Channel type strings
         \return channel type strings (QStringList)
     */
@@ -205,6 +229,8 @@ private:
     QStringList _categories;
     QString _logo;
     bool _passwordProtected;
+    QString _currentEpg;
+    QString _currentEpgId;
 };
 
 #endif // TANO_CHANNEL_H_

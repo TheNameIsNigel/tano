@@ -23,6 +23,7 @@
 
 class QQuickWidget;
 
+class EpgElement;
 class PlaylistElement;
 
 class ApplicationWindow : public QQmlApplicationEngine
@@ -50,6 +51,7 @@ private:
 
     QObject *_select;
 
+    EpgElement *_epg;
     PlaylistElement *_playlist;
 };
 

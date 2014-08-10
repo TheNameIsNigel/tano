@@ -30,7 +30,9 @@ SET(Tano_Quick_Qml
 
     qml/fonts/fontawesome-webfont.js
 
-    qml/js/main.js
+    qml/menus/MainMenuBar.qml
+    qml/menus/MenuFile.qml
+    qml/menus/MenuPlayback.qml
 
     qml/osd/OsdBar.qml
     qml/osd/OsdButtons.qml
@@ -51,8 +53,10 @@ SET(Tano_Quick_Qml
 SET(Tano_Quick_Srcs
     ApplicationWindow.cpp
 
+    common/ChannelSelect.cpp
     common/Constants.cpp
 
+    elements/EpgElement.cpp
     elements/PlaylistElement.cpp
 
     qml/qml.qrc
