@@ -29,12 +29,8 @@ FocusScope {
     anchors.left: parent.right
     anchors.leftMargin: 0
 
-    VideoBlur {
+    OverlayDark {
         anchors.fill: parent
-
-        type: "right"
-        dark: true
-        marginRight: osdPlaylist.width + osdPlaylist.anchors.leftMargin
     }
 
     ListView {
@@ -54,6 +50,8 @@ FocusScope {
         focus: true
 
         KeyNavigation.left: osdBar; KeyNavigation.right: osdBar
+
+        Keys.onReturnPressed: console.log('Selected channel: ' + currentIndex)
     }
 
     ScrollBar {

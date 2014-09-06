@@ -18,6 +18,7 @@
 
 import QtQuick 2.0
 
+import "bar"
 import "playlist"
 
 FocusScope {
@@ -27,6 +28,23 @@ FocusScope {
     anchors.fill: parent
     visible: false
     focus: true
+
+    Timer {
+        id: osdTimer
+        interval: 2000
+        repeat: false
+        onTriggered: osdBar.enabled = false
+    }
+
+    MouseArea {
+        id: osdMouse
+        anchors.fill: parent
+        hoverEnabled: true
+        onPositionChanged: {
+            osdBar.enabled = true
+            //osdTimer.start()
+        }
+    }
 
     OsdBar {
         id: osdBar
@@ -39,6 +57,13 @@ FocusScope {
 
         anchors.top: parent.top
         anchors.bottom: parent.bottom
+    }
+
+    OsdNumber {
+        id: osdNumber
+
+        x: 100;
+        y: 100;
     }
 
     Component.onCompleted: mainWindow.osd = mainOsd

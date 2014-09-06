@@ -126,7 +126,7 @@ Item {
         }*/
 
         onClicked: {
-            //rectangle.forceActiveFocus()
+            console.log('Selected channel: ' + model.name)
         }
     }
 }

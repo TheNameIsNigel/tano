@@ -18,23 +18,51 @@
 
 import QtQuick 2.0
 
-Rectangle {
-    id: rectangle
-    height: width
+import "../rectangles"
 
-    color: "#20ffffff"
-
-    property alias size: rectangle.width
+Item {
     property alias icon: buttonText.text
     property alias iconColor: buttonText.color
+    property bool topMode: false
+    property bool isLast: false
 
-    Text {
-        id: buttonText
-        anchors.fill: parent
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        font.pixelSize: 22
-        font.family: iconFont.name
+    id: rectangle
+
+    height: TanoUi.osdRowHeight
+    width: height + (isLast ? 1 : 2)
+
+    OverlayDarkHighlight {
+        anchors {
+            fill: parent
+            topMargin: topMode ? 1 : 0
+            bottomMargin: topMode ? 0 : 1
+            rightMargin: isLast ? 2 : 3
+        }
+
+        Rectangle {
+            id: highlight
+            anchors.fill: parent
+            color: "#00ffffff"
+        }
+
+        Text {
+            id: buttonText
+            anchors.fill: parent
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            font.pixelSize: 16
+            font.family: iconFont.name
+        }
+    }
+
+    OverlayDarkLineVertical {
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            right: parent.right
+            topMargin: topMode ? 0 : -1
+        }
+        hasRight: !isLast
     }
 
     MouseArea {
@@ -43,7 +71,8 @@ Rectangle {
         anchors.fill: parent
 
         onClicked: {
-            rectangle.forceActiveFocus()
+            //rectangle.forceActiveFocus()
+            console.log(buttonText.height, buttonText.width)
         }
     }
 
@@ -53,8 +82,8 @@ Rectangle {
             when: mouseArea.pressedButtons & Qt.LeftButton
 
             PropertyChanges {
-                target: rectangle
-                color: "#80ffffff"
+                target: highlight
+                color: "#10ffffff"
             }
         },
         State {
@@ -62,9 +91,13 @@ Rectangle {
             when: mouseArea.containsMouse || rectangle.activeFocus
 
             PropertyChanges {
-                target: rectangle
-                color: "#60ffffff"
+                target: highlight
+                color: "#0affffff"
             }
         }
     ]
+
+    transitions: Transition {
+        ColorAnimation { duration: 200 }
+    }
 }

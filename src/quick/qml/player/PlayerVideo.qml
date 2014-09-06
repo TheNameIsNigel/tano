@@ -25,14 +25,7 @@ Rectangle {
     height: 480
     color: "#000000"
 
-    /*Image {
-        id: tempVideo
-        anchors.fill: parent
-        fillMode: Image.PreserveAspectFit
-        source: "../img/video.jpg"
-    }*/
-
-    VlcVideoPlayer {
+    /*VlcVideoPlayer {
         id: player
         anchors.fill: parent
         //url: "http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_640x360.m4v"
@@ -41,5 +34,17 @@ Rectangle {
         autoplay: false
 
         Component.onCompleted: mainWindow.player = player
+    }*/
+
+    Image {
+        id: tempVideo
+        anchors.fill: parent
+        fillMode: Image.PreserveAspectFit
+        source: "../img/bg.jpg"
     }
+
+    /*Connections {
+        target: TanoPlayback
+        onPlayUrl: player.url = url
+    }*/
 }

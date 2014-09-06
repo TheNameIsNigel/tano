@@ -18,40 +18,48 @@
 
 import QtQuick 2.0
 
-import "../osd"
+Item {
+    property bool hasLeft: true
+    property bool hasRight: true
 
-FocusScope {
-    width: 854
-    height: 480
+    width: 1 + (hasLeft ? 1 : 0) + (hasRight ? 1 : 0)
+    height: 200
 
-    focus: true
-
-    PlayerVideo {
-        id: video
-        anchors.fill: parent
-    }
-
-    OsdMain {
-        id: osd
-        anchors.fill: parent
-
-        focus: true
-    }
-
-    Keys.onPressed: {
-        switch(event.key) {
-        case Qt.Key_0:
-        case Qt.Key_1:
-        case Qt.Key_2:
-        case Qt.Key_3:
-        case Qt.Key_4:
-        case Qt.Key_5:
-        case Qt.Key_6:
-        case Qt.Key_7:
-        case Qt.Key_8:
-        case Qt.Key_9:
-            TanoChannelSelect.process(event.key - Qt.Key_0)
-            break;
+    Rectangle {
+        id: lineLeft
+        anchors {
+            left: parent.left
+            top: parent.top
+            bottom: parent.bottom
         }
+
+        width: hasLeft ? 1 : 0
+        color: "#f3272729"
+    }
+
+    Rectangle {
+        id: lineCenter
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+            bottom: parent.bottom
+            leftMargin: hasLeft ? 1 : 0
+            rightMargin: hasRight ? 1 : 0
+        }
+
+        color: "#f30d0d0e"
+    }
+
+    Rectangle {
+        id: lineRight
+        anchors {
+            right: parent.right
+            top: parent.top
+            bottom: parent.bottom
+        }
+
+        width: hasRight ? 1 : 0
+        color: "#f3272729"
     }
 }

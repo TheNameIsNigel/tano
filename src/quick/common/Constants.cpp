@@ -37,6 +37,8 @@ QQmlPropertyMap *Tano::Quick::ui()
     uiConstantsData->insert("colorBlurBgDark", "#d0232323");
 
     // OSD
+    uiConstantsData->insert("osdRowHeight", 42);
+    uiConstantsData->insert("osdProgressHeight", 6);
     uiConstantsData->insert("osdLRMargin", 100);
     uiConstantsData->insert("osdTBMargin", 25);
 

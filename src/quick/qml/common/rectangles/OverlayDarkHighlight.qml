@@ -16,42 +16,10 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef TANO_CHANNELSELECT_H_
-#define TANO_CHANNELSELECT_H_
+import QtQuick 2.0
 
-#include <QtCore/QTimer>
-
-class ChannelSelect : public QObject
-{
-Q_OBJECT
-public:
-    ChannelSelect(QObject *parent);
-    ~ChannelSelect();
-
-public slots:
-    void process(int key);
-
-    inline void back() { channel(false); }
-    void channel(bool direction);
-    inline void next() { channel(true); }
-
-    inline void setChannels(const QList<int> &list) { _channels = list; }
-
-private slots:
-    void display();
-
-signals:
-    void channelSelect(const int channel);
-    void displayNumber(const int number);
-
-private:
-    QList<int> _channels;
-    QTimer *_timer;
-
-    int _current;
-    int _digit;
-    int _full;
-    int _number[3];
-};
-
-#endif // TANO_CHANNELSELECT_H_
+Rectangle {
+    width: 100
+    height: 50
+    color: "#0affffff"
+}

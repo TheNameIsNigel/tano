@@ -34,12 +34,14 @@ PlaylistElement::PlaylistElement(const QString &defaultPlaylist,
       _defaultPlaylist(defaultPlaylist),
       _model(new PlaylistModel(this)),
       _modelUpdate(new PlaylistUpdate(_model)),
-      _select(0),
       _hasPlaylist(false)
 {
     _filterModel = new PlaylistFilterModel(this);
     _filterModel->setDynamicSortFilter(true);
     _filterModel->setSourceModel(_model);
+
+    _select = new ChannelSelect(this);
+    connect(_select, SIGNAL(channelSelect(int)), this, SLOT(channelSelected(int)));
 
     openPlaylist(true);
 }
@@ -51,14 +53,6 @@ PlaylistElement::~PlaylistElement()
 
 void PlaylistElement::openPlaylist(bool start)
 {
-    if (_select != 0) {
-        // TODO: select
-        /*disconnect(ui->actionBack, SIGNAL(triggered()), _select, SLOT(back()));
-        disconnect(ui->actionNext, SIGNAL(triggered()), _select, SLOT(next()));
-        disconnect(_select, SIGNAL(channelSelect(int)), _playlistTab->playlist(), SLOT(channelSelected(int)));*/
-        delete _select;
-    }
-
     if (!start) {
         _playlistName = FileDialogs::openPlaylistSimple();
         if (_playlistName.isEmpty())
@@ -90,12 +84,40 @@ void PlaylistElement::openPlaylistComplete()
 
     _hasPlaylist = true;
 
-    _select = new ChannelSelect(this, _model->numbers());
-    // TODO: Select
-    /*connect(ui->actionBack, SIGNAL(triggered()), _select, SLOT(back()));
-    connect(ui->actionNext, SIGNAL(triggered()), _select, SLOT(next()));
-    connect(_select, SIGNAL(channelSelect(int)), _playlistTab->playlist(), SLOT(channelSelected(int)));*/
+    _select->setChannels(_model->numbers());
 
     //_playlistTab->setPlaylistName(_model->name());
     //_playlistTab->setFilters(_model->categories(), _model->languages());
+}
+
+void PlaylistElement::channelSelected(const QModelIndex &index)
+{
+    Channel *current = _model->row(_filterModel->mapToSource(index).row());
+    emit itemSelected(current);
+    //updateSelection(current);
+}
+
+void PlaylistElement::channelSelected(Channel *channel)
+{
+    emit itemSelected(channel);
+    //updateSelection(channel);
+}
+
+void PlaylistElement::channelSelected(int channel)
+{
+    if (!channel) {
+        emit itemSelected(0);
+        return;
+    }
+
+    Channel *current = _model->number(channel);
+    emit itemSelected(current);
+    //updateSelection(current);
+}
+
+void PlaylistElement::channelSelected(const QString &xmltvId)
+{
+    Channel *current = _model->xmltvId(xmltvId);
+    emit itemSelected(current);
+    //updateSelection(current);
 }

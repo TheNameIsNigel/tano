@@ -18,10 +18,8 @@
 
 #include "ChannelSelect.h"
 
-ChannelSelect::ChannelSelect(QObject *parent,
-                             const QList<int> &list)
+ChannelSelect::ChannelSelect(QObject *parent)
     : QObject(parent),
-      _channels(list),
       _current(1),
       _digit(1)
 {
@@ -54,8 +52,7 @@ void ChannelSelect::process(int key)
 
     _full = _number[2]*100 + _number[1]*10 + _number[0];
 
-    // TODO: Display
-    //_lcd->display(_full);
+    emit displayNumber(_full);
 
     if(_digit < 3) {
         _timer->start(1000);
@@ -68,9 +65,10 @@ void ChannelSelect::process(int key)
 void ChannelSelect::display()
 {
     if(_channels.contains(_full)) {
+        _current = _full;
         emit channelSelect(_full);
     } else {
-        // TODO: _lcd->display(_old);
+        emit displayNumber(_current);
     }
 
     _number[0] = 0;

@@ -16,42 +16,36 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef TANO_CHANNELSELECT_H_
-#define TANO_CHANNELSELECT_H_
+#ifndef TANO_PLAYBACKELEMENT_H_
+#define TANO_PLAYBACKELEMENT_H_
 
-#include <QtCore/QTimer>
+#include <QtCore/QObject>
 
-class ChannelSelect : public QObject
+class Channel;
+class NetworkUdpxy;
+class XmltvManager;
+
+class PlaybackElement : public QObject
 {
 Q_OBJECT
 public:
-    ChannelSelect(QObject *parent);
-    ~ChannelSelect();
+    explicit PlaybackElement(QObject *parent = 0);
+    virtual ~PlaybackElement();
+
+    void setXmltv(XmltvManager *xmltv);
 
 public slots:
-    void process(int key);
-
-    inline void back() { channel(false); }
-    void channel(bool direction);
-    inline void next() { channel(true); }
-
-    inline void setChannels(const QList<int> &list) { _channels = list; }
-
-private slots:
-    void display();
+    void playChannel(Channel* channel);
+    void stop();
 
 signals:
-    void channelSelect(const int channel);
-    void displayNumber(const int number);
+    void playUrl(const QString &url);
 
 private:
-    QList<int> _channels;
-    QTimer *_timer;
+    Channel *_channel;
+    NetworkUdpxy *_udpxy;
 
-    int _current;
-    int _digit;
-    int _full;
-    int _number[3];
+    XmltvManager *_xmltv;
 };
 
-#endif // TANO_CHANNELSELECT_H_
+#endif // TANO_PLAYBACKELEMENT_H_

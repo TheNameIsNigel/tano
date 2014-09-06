@@ -17,39 +17,33 @@
 *****************************************************************************/
 
 import QtQuick 2.1
-import QtGraphicalEffects 1.0
 
-Item {
-    property string type: "bottom"
-    property bool dark: false
+import "../../fonts/fontawesome-webfont.js" as FontAwesome
 
-    property int marginTop: 0
-    property int marginBottom: 0
-    property int marginLeft: 0
-    property int marginRight: 0
+import "../../common/buttons"
 
-    FastBlur {
-        id: blur
-        anchors {
-            top: type === "bottom" ? undefined : parent.top;
-            bottom: type === "top" ? undefined : parent.bottom
-            left: type === "right" ? undefined : parent.left
-            right: type === "left" ? undefined : parent.right
+FocusScope {
+    width: 100
+    height: 100
 
-            topMargin: marginTop
-            bottomMargin: marginBottom
-            leftMargin: marginLeft
-            rightMargin: marginRight
-        }
+    /*onActiveFocusChanged: {
 
-        width: video.width
-        height: video.height
-        source: video
-        radius: 32
-    }
+    }*/
 
-    Rectangle {
+    ListView {
+        id: view
+        interactive: false
+        orientation: Qt.Horizontal
         anchors.fill: parent
-        color: dark ? TanoUi.colorBlurBgDark : TanoUi.colorBlurBg
+        model: OsdButtonsModel { }
+
+        KeyNavigation.up: osdPlaylist
+        KeyNavigation.down: osdPlaylist
+
+        delegate: OverlayDarkButton {
+            icon: FontAwesome.Icon[model.icon]
+            iconColor: model.color
+            isLast: model.index === view.model.count - 1
+        }
     }
 }

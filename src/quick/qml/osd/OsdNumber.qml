@@ -21,59 +21,39 @@ import QtQuick 2.1
 import "../common/rectangles"
 
 FocusScope {
-    height: 200
+    height: 50
+    width: 100
 
     anchors {
-        right: parent.right
+    /*    right: parent.right
         left: parent.left
-        top: parent.bottom
+        top: parent.bottom*/
     }
 
     clip: true
-    activeFocusOnTab: true
 
-    property bool enabled: true
-
-    VideoBlur {
+    OverlayDark {
         anchors.fill: parent
-        marginBottom: osdBar.height + osdBar.anchors.topMargin
     }
 
     Item {
-        anchors {
-            fill: parent
-            leftMargin: TanoUi.osdLRMargin
-            rightMargin: TanoUi.osdLRMargin
-            topMargin: TanoUi.osdTBMargin
-            bottomMargin: TanoUi.osdTBMargin
-        }
+        anchors.fill: parent
 
-        OsdButtons {
-            id: buttons
-            anchors.topMargin: 10
-            anchors.right: parent.right
-            anchors.top: slider.bottom
-            anchors.left: parent.left
-            anchors.bottom: parent.bottom
-        }
-
-        OsdInfo {
-            id: info
-            anchors.right: parent.right
-            anchors.left: parent.left
-            anchors.top: parent.top
-        }
-
-        OsdSlider {
-            id: slider
-            anchors.topMargin: 5
-            anchors.right: parent.right
-            anchors.left: parent.left
-            anchors.top: info.bottom
+        Text {
+            id: numberText
+            anchors.fill: parent
+            color: "#ffffff"
+            text: "100"
+            font.pixelSize: 24
         }
     }
 
-    states: State {
+    Connections {
+        target: TanoChannelSelect
+        onDisplayNumber: numberText.text = number
+    }
+
+    /*states: State {
         name: "osdOpen"
         when: enabled && !osdPlaylist.activeFocus
         PropertyChanges { target: osdBar; anchors.topMargin: -height }
@@ -81,5 +61,5 @@ FocusScope {
 
     transitions: Transition {
         NumberAnimation { properties: "anchors.topMargin"; duration: 600; easing.type: Easing.OutQuint }
-    }
+    }*/
 }

@@ -25,8 +25,10 @@
 #include "core/settings/Settings.h"
 #include "core/xmltv/XmltvManager.h"
 
+#include "common/ChannelSelect.h"
 #include "common/Constants.h"
 #include "elements/EpgElement.h"
+#include "elements/PlaybackElement.h"
 #include "elements/PlaylistElement.h"
 
 #include "ApplicationWindow.h"
@@ -101,6 +103,12 @@ void ApplicationWindow::createModels()
 
     _playlist = new PlaylistElement(_defaultPlaylist, this);
     rootContext()->setContextProperty("TanoPlaylist", _playlist->model());
+    rootContext()->setContextProperty("TanoChannelSelect", _playlist->select());
 
+    _playback = new PlaybackElement(this);
+    _playback->setXmltv(_epg->xmltv());
+    rootContext()->setContextProperty("TanoPlayback", _playback);
+
+    connect(_playlist, SIGNAL(itemSelected(Channel *)), _playback, SLOT(playChannel(Channel *)));
     connect(_epg->xmltv(), SIGNAL(currentPlaylist(QString, QString, QString)), _playlist->sourceModel(), SLOT(updateCurrentEpg(QString, QString, QString)));
 }

@@ -30,7 +30,7 @@ ApplicationWindow {
     height: 480
 
     minimumHeight: 360
-    minimumWidth: 640
+    minimumWidth: 756
 
     property QtObject osd: null
     property QtObject player: null

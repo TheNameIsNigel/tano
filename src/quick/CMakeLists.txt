@@ -24,7 +24,11 @@ ADD_DEFINITIONS(-DQT_STATIC -D_REENTRANT -DQML_IMPORT_PATH=qml/)
 SET(Tano_Quick_Qml
     qml/main.qml
 
-    qml/common/buttons/SquareButton.qml
+    qml/common/buttons/OverlayDarkButton.qml
+    qml/common/rectangles/OverlayDark.qml
+    qml/common/rectangles/OverlayDarkHighlight.qml
+    qml/common/rectangles/OverlayDarkLineHorizontal.qml
+    qml/common/rectangles/OverlayDarkLineVertical.qml
     qml/common/rectangles/VideoBlur.qml
     qml/common/views/ScrollBar.qml
 
@@ -34,12 +38,14 @@ SET(Tano_Quick_Qml
     qml/menus/MenuFile.qml
     qml/menus/MenuPlayback.qml
 
-    qml/osd/OsdBar.qml
-    qml/osd/OsdButtons.qml
-    qml/osd/OsdButtonsModel.qml
-    qml/osd/OsdInfo.qml
     qml/osd/OsdMain.qml
-    qml/osd/OsdSlider.qml
+    qml/osd/OsdNumber.qml
+
+    qml/osd/bar/OsdBar.qml
+    qml/osd/bar/OsdButtons.qml
+    qml/osd/bar/OsdButtonsModel.qml
+    qml/osd/bar/OsdInfo.qml
+    qml/osd/bar/OsdSlider.qml
 
     qml/osd/playlist/OsdPlaylist.qml
     qml/osd/playlist/OsdPlaylistDelegate.qml
@@ -57,6 +63,7 @@ SET(Tano_Quick_Srcs
     common/Constants.cpp
 
     elements/EpgElement.cpp
+    elements/PlaybackElement.cpp
     elements/PlaylistElement.cpp
 
     qml/qml.qrc

@@ -16,39 +16,31 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-import QtQuick 2.1
+import QtQuick 2.0
 
-import "../fonts/fontawesome-webfont.js" as FontAwesome
+Item {
+    width: 200
+    height: 2
 
-import "../common/buttons"
-
-FocusScope {
-    property alias interactive: gridView.interactive
-
-    width: 100
-    height: 100
-
-    /*onActiveFocusChanged: {
-
-    }*/
-
-    GridView {
-        id: gridView
-        anchors.fill: parent;
-        cellWidth: 60; cellHeight: 60
-        /*focus: true*/
-        model: OsdButtonsModel { }
-
-        KeyNavigation.up: osdPlaylist
-        KeyNavigation.down: osdPlaylist
-
-        delegate: SquareButton {
-            id: container
-            anchors.margins: 5
-            width: GridView.view.cellWidth - 10; height: GridView.view.cellHeight - 10
-
-            icon: FontAwesome.Icon[model.icon]
-            iconColor: model.color
+    Rectangle {
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
         }
+
+        height: 1
+        color: "#f30d0d0e"
+    }
+
+    Rectangle {
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+
+        height: 1
+        color: "#f3272729"
     }
 }

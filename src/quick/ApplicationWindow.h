@@ -21,9 +21,8 @@
 
 #include <QtQml/QQmlApplicationEngine>
 
-class QQuickWidget;
-
 class EpgElement;
+class PlaybackElement;
 class PlaylistElement;
 
 class ApplicationWindow : public QQmlApplicationEngine
@@ -49,9 +48,8 @@ private:
     int _posX;
     int _posY;
 
-    QObject *_select;
-
     EpgElement *_epg;
+    PlaybackElement *_playback;
     PlaylistElement *_playlist;
 };
 

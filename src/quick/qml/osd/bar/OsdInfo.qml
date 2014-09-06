@@ -24,40 +24,6 @@ Rectangle {
     height: 70
     color: "#00000000"
 
-    Item {
-        id: logo
 
-        width: parent.height
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-
-    }
-
-    Text {
-        id: title
-        color: "#ffffff"
-        text: "POP TV HD"
-        anchors.right: parent.right
-        anchors.rightMargin: 8
-        anchors.left: logo.right
-        anchors.leftMargin: 8
-        anchors.top: parent.top
-        anchors.topMargin: 8
-        font.pixelSize: 24
-    }
-
-    Text {
-        id: subtitle
-        color: "#ffffff"
-        text: "Game of Thrones"
-        anchors.top: title.bottom
-        anchors.topMargin: 8
-        anchors.right: parent.right
-        anchors.rightMargin: 8
-        anchors.left: logo.right
-        anchors.leftMargin: 8
-        font.pixelSize: 20
-    }
 
 }

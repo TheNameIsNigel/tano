@@ -19,8 +19,10 @@
 #ifndef TANO_PLAYLISTELEMENT_H_
 #define TANO_PLAYLISTELEMENT_H_
 
+#include <QtCore/QModelIndex>
 #include <QtCore/QObject>
 
+class Channel;
 class ChannelSelect;
 class PlaylistFilterModel;
 class PlaylistModel;
@@ -36,11 +38,19 @@ public:
 
     inline PlaylistFilterModel *model() { return _filterModel; }
     inline PlaylistModel *sourceModel() { return _model; }
+    inline ChannelSelect *select() { return _select; }
 
 public slots:
+    void channelSelected(Channel *channel);
+    void channelSelected(int channel);
+    void channelSelected(const QString &xmltvId);
     void openPlaylist(bool start = false);
 
+signals:
+    void itemSelected(Channel *);
+
 private slots:
+    void channelSelected(const QModelIndex &index);
     void openPlaylistComplete();
 
 private:

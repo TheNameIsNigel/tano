@@ -22,13 +22,45 @@ Rectangle {
     property alias ratio: progress.width
 
     width: 400
-    height: 5
-    color: "#33ffffff"
+    height: TanoUi.osdProgressHeight
+    radius: TanoUi.osdProgressHeight / 2
+    gradient: Gradient {
+        GradientStop {
+            position: 0
+            color: "#f30e0e0e"
+        }
+
+        GradientStop {
+            position: 0.5
+            color: "#f3161616"
+        }
+
+        GradientStop {
+            position: 1
+            color: "#f30e0e0e"
+        }
+    }
 
     Rectangle {
         id: progress
         width: 276
-        color: "#ffffff"
+        radius: TanoUi.osdProgressHeight / 2
+        gradient: Gradient {
+            GradientStop {
+                position: 0
+                color: "#f7f7f7"
+            }
+
+            GradientStop {
+                position: 0.05
+                color: "#e4e4e4"
+            }
+
+            GradientStop {
+                position: 1
+                color: "#d7d7d7"
+            }
+        }
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.top: parent.top
