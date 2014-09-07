@@ -16,37 +16,27 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-import QtQuick 2.1
+import QtQuick 2.0
 
-import "../../fonts/fontawesome-webfont.js" as FontAwesome
-
-import "../../common/buttons"
-
-FocusScope {
-    property alias model: view.model
-    property bool isRight: false
-
-    id: scope
-    width: (TanoUi.osdRowHeight + 2) * view.model.count
-
-    /*onActiveFocusChanged: {
-
-    }*/
-
-    ListView {
-        id: view
-        interactive: false
-        orientation: Qt.Horizontal
-        anchors.fill: parent
-
-        KeyNavigation.up: osdPlaylist
-        KeyNavigation.down: osdPlaylist
-
-        delegate: OverlayDarkButton {
-            icon: FontAwesome.Icon[model.icon]
-            iconColor: model.color
-            isLast: scope.isRight ? (model.index === 0) : (model.index === view.model.count - 1)
-            isRight: scope.isRight
-        }
+ListModel {
+    ListElement {
+        icon: "Play"
+        color: "#ffffff"
+    }
+    ListElement {
+        icon: "Stop"
+        color: "#ffffff"
+    }
+    ListElement {
+        icon: "FastBackward"
+        color: "#ffffff"
+    }
+    ListElement {
+        icon: "FastForward"
+        color: "#ffffff"
+    }
+    ListElement {
+        icon: "Circle"
+        color: "#8c1515"
     }
 }

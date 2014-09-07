@@ -19,8 +19,6 @@
 import QtQuick 2.0
 
 ListModel {
-    id: osdButtonsModel
-
     ListElement {
         icon: "Play"
         color: "#ffffff"
@@ -28,17 +26,5 @@ ListModel {
     ListElement {
         icon: "Stop"
         color: "#ffffff"
-    }
-    ListElement {
-        icon: "FastBackward"
-        color: "#ffffff"
-    }
-    ListElement {
-        icon: "FastForward"
-        color: "#ffffff"
-    }
-    ListElement {
-        icon: "Circle"
-        color: "#8c1515"
     }
 }

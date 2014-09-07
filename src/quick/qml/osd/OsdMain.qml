@@ -62,8 +62,23 @@ FocusScope {
     OsdNumber {
         id: osdNumber
 
-        x: 100;
-        y: 100;
+        anchors {
+            left: parent.left
+            top: parent.top
+            leftMargin: TanoUi.osdLRMargin
+            topMargin: TanoUi.osdTBMargin
+        }
+    }
+
+    OsdTime {
+        id: osdTime
+
+        anchors {
+            right: parent.right
+            top: parent.top
+            rightMargin: TanoUi.osdLRMargin
+            topMargin: TanoUi.osdTBMargin
+        }
     }
 
     Component.onCompleted: mainWindow.osd = mainOsd

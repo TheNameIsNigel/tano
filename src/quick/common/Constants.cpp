@@ -39,7 +39,7 @@ QQmlPropertyMap *Tano::Quick::ui()
     // OSD
     uiConstantsData->insert("osdRowHeight", 42);
     uiConstantsData->insert("osdProgressHeight", 6);
-    uiConstantsData->insert("osdLRMargin", 100);
+    uiConstantsData->insert("osdLRMargin", 25);
     uiConstantsData->insert("osdTBMargin", 25);
 
     return uiConstantsData;

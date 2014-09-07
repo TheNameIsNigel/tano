@@ -149,12 +149,20 @@ FocusScope {
                     anchors {
                         left: parent.left
                         right: parent.right
-                        rightMargin: 1
                     }
 
                     OsdButtons {
-                        id: buttons
-                        anchors.fill: parent
+                        id: buttonsLeft
+                        height: parent.height
+                        model: OsdButtonsLeft { }
+                    }
+
+                    OsdButtons {
+                        id: buttonsRight
+                        height: parent.height
+                        Layout.alignment: Qt.AlignRight
+                        model: OsdButtonsRight { }
+                        isRight: true
                     }
                 }
             }

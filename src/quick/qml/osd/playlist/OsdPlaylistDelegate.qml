@@ -17,96 +17,84 @@
 *****************************************************************************/
 
 import QtQuick 2.1
+import QtQuick.Layouts 1.1
 
-Item {
+import "../../common/rectangles"
+import "../../common/text"
+import "../../common/views"
+
+ListDelegateDark {
     id: osdPlaylistDelegate
-
     width: 300
     height: 56
 
-    Rectangle {
-        id: rectangleLight
-        color: "#20CBCBCB"
+    down: mouseArea.pressedButtons & Qt.LeftButton
+    hover: mouseArea.containsMouse || osdPlaylistDelegate.activeFocus
 
+    Item {
+        id: imageContainer
         anchors {
-            fill: parent
-            margins: 3
+            top: parent.top
+            bottom: parent.bottom
+            left: parent.left
         }
 
-        Rectangle {
-            id: rectangleDark
-            color: "#20D4D4D4"
+        width: parent.height
 
-            width: parent.height
+        Image {
+            id: image
             anchors {
-                bottom: parent.bottom
-                left: parent.left
-                top: parent.top
+                fill: parent
+                margins: 4
             }
+            fillMode: Image.PreserveAspectFit
+            source: model.logo
+        }
+    }
 
-            Image {
-                id: image
-                fillMode: Image.PreserveAspectFit
-                width: parent.height
-                anchors.margins: 1
-                anchors.fill: parent
-                source: model.logo
-            }
+    ColumnLayout {
+        id: info
+        spacing: 0
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            left: imageContainer.right
+            right: textNumber.left
+            leftMargin: 4
+            rightMargin: 4
         }
 
-        Item {
-            anchors.left: rectangleDark.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-            anchors.margins: 5
-
-            Text {
-                id: textNumber
-                color: "#ffffff"
-                text: number
-                font.pointSize: 20
-                verticalAlignment: Text.AlignVCenter
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.right: parent.right
-                anchors.rightMargin: 3
-                font.family: "Helvetica Neue"
-                font.weight: Font.Bold
-            }
-
-            Text {
-                id: textName
-                color: "#ffffff"
-                text: name
-                font.pointSize: 17
-                anchors.left: parent.left
-                anchors.top: parent.top
-                anchors.right: textNumber.left
-                anchors.leftMargin: 3
-                anchors.rightMargin: 3
-                font.family: "Helvetica Neue"
-                font.weight: Font.DemiBold
-
-                elide: Text.ElideRight
-            }
-
-            Text {
-                color: "#ffffff"
-                text: model.currentEpg
-                font.pointSize: 14
-                verticalAlignment: Text.AlignVCenter
-                anchors.left: parent.left
-                anchors.top: textName.bottom
-                anchors.right: textNumber.left
-                anchors.leftMargin: 3
-                anchors.rightMargin: 3
-                font.family: "Helvetica Neue"
-                font.weight: Font.DemiBold
-
-                elide: Text.ElideRight
-            }
+        OverlayDarkText {
+            id: textName
+            text: model.name
+            font.pointSize: 16
+            font.weight: Font.DemiBold
+            elide: Text.ElideRight
+            Layout.alignment: textEpg.text.length ? Qt.AlignBottom : Qt.AlignVCenter
         }
+
+        OverlayDarkText {
+            id: textEpg
+            text: model.currentEpg
+            font.pointSize: 13
+            elide: Text.ElideRight
+            visible: text.length
+            Layout.alignment: Qt.AlignTop
+        }
+    }
+
+    OverlayDarkText {
+        id: textNumber
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            right: parent.right
+            rightMargin: 4
+        }
+        text: model.number
+        font.pointSize: 20
+        verticalAlignment: Text.AlignVCenter
+        font.weight: Font.Bold
     }
 
     MouseArea {

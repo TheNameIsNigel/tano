@@ -18,56 +18,8 @@
 
 import QtQuick 2.0
 
-Item {
-    id: osdPlaylistHighlight
-    width: 300
-    height: 60
-
-    Rectangle {
-        id: top
-        color: "#ffffff"
-
-        height: 3
-        anchors {
-            left: parent.left
-            right: parent.right
-            top: parent.top
-        }
-    }
-
-    Rectangle {
-        id: bottom
-        color: "#ffffff"
-
-        height: 3
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-        }
-    }
-
-    Rectangle {
-        id: left
-        color: "#ffffff"
-
-        width: 3
-        anchors {
-            left: parent.left
-            top: parent.top
-            bottom: parent.bottom
-        }
-    }
-
-    Rectangle {
-        id: right
-        color: "#ffffff"
-
-        width: 3
-        anchors {
-            right: parent.right
-            top: parent.top
-            bottom: parent.bottom
-        }
-    }
+Text {
+    color: "#dbdbdb"
+    style: Text.Raised
+    styleColor: "#191a1b"
 }

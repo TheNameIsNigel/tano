@@ -48,7 +48,7 @@ XmltvManager::XmltvManager(QObject *parent)
 
     _playlistTimer = new QTimer(this);
     connect(_playlistTimer, SIGNAL(timeout()), this, SLOT(currentPlaylist()));
-    _playlistTimer->start(10000);
+    _playlistTimer->start(5000);
 
     _watcher = new QFutureWatcher<bool>(this);
     connect(_watcher, SIGNAL(finished()), this, SLOT(loadXmltvFinish()));

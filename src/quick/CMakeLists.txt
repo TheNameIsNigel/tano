@@ -29,10 +29,13 @@ SET(Tano_Quick_Qml
     qml/common/rectangles/OverlayDarkHighlight.qml
     qml/common/rectangles/OverlayDarkLineHorizontal.qml
     qml/common/rectangles/OverlayDarkLineVertical.qml
-    qml/common/rectangles/VideoBlur.qml
+    qml/common/text/OverlayDarkText.qml
+    qml/common/views/ListDelegateDark.qml
     qml/common/views/ScrollBar.qml
 
     qml/fonts/fontawesome-webfont.js
+
+    qml/js/datetime.js
 
     qml/menus/MainMenuBar.qml
     qml/menus/MenuFile.qml
@@ -40,16 +43,16 @@ SET(Tano_Quick_Qml
 
     qml/osd/OsdMain.qml
     qml/osd/OsdNumber.qml
+    qml/osd/OsdTime.qml
 
     qml/osd/bar/OsdBar.qml
     qml/osd/bar/OsdButtons.qml
-    qml/osd/bar/OsdButtonsModel.qml
-    qml/osd/bar/OsdInfo.qml
+    qml/osd/bar/OsdButtonsLeft.qml
+    qml/osd/bar/OsdButtonsRight.qml
     qml/osd/bar/OsdSlider.qml
 
     qml/osd/playlist/OsdPlaylist.qml
     qml/osd/playlist/OsdPlaylistDelegate.qml
-    qml/osd/playlist/OsdPlaylistHighlight.qml
 
     qml/player/PagePlayer.qml
     qml/player/PlayerVideo.qml

@@ -16,14 +16,12 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-import QtQuick 2.0
+function getCurrentTime()
+{
+    var time = new Date();
 
-Rectangle {
-    id: rectangle1
-    width: 300
-    height: 70
-    color: "#00000000"
+    var hh = time.getHours() < 10 ? "0" + time.getHours() : time.getHours();
+    var mm = time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();
 
-
-
+    return hh + ":" + mm;
 }

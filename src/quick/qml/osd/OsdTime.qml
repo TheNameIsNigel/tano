@@ -16,47 +16,30 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-import QtQuick 2.1
-import QtQuick.Layouts 1.1
+import QtQuick 2.0
+import QtQml 2.0
 
-import "../common/buttons"
 import "../common/rectangles"
 
-import "../fonts/fontawesome-webfont.js" as FontAwesome
+import "../js/datetime.js" as TanoDate
 
 OverlayDark {
     height: TanoUi.osdRowHeight
     width: 100
 
-    RowLayout {
-        anchors {
-            fill: parent
-            leftMargin: 1
-            rightMargin: 1
-        }
-        spacing: 0
-
-        OverlayDarkButton {
-            icon: FontAwesome.Icon["Home"]
-            iconColor: "#ffffff"
-            isLast: true
-            topMode: true
-            standalone: true
-        }
-
-        Text {
-            id: numberText
-            color: "#ffffff"
-            text: "888"
-            font.pixelSize: 16
-            font.weight: Font.DemiBold
-            horizontalAlignment: Text.AlignHCenter
-            Layout.fillWidth: true
-        }
+    Text {
+        id: timeText
+        anchors.fill: parent
+        color: "#ffffff"
+        text: "22:22"
+        font.pixelSize: 16
+        font.weight: Font.DemiBold
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
     }
 
-    Connections {
-        target: TanoChannelSelect
-        onDisplayNumber: numberText.text = number
+    Timer {
+        interval: 500; running: true; repeat: true; triggeredOnStart: true
+        onTriggered: timeText.text = TanoDate.getCurrentTime()
     }
 }

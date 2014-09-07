@@ -24,8 +24,6 @@ import "../../common/views"
 FocusScope {
     width: 350; height: 200
 
-    clip: true
-
     anchors.left: parent.right
     anchors.leftMargin: 0
 
@@ -37,16 +35,14 @@ FocusScope {
         id: listView
         clip: true
 
-        anchors.fill: parent
-        anchors.leftMargin: 25
-        anchors.rightMargin: 25
-        anchors.topMargin: 50
-        anchors.bottomMargin: 50
+        anchors {
+            fill: parent
+            margins: 25
+        }
 
         model: TanoPlaylist
         delegate: OsdPlaylistDelegate { }
-        highlight: OsdPlaylistHighlight { }
-        spacing: 8
+        spacing: -1
         focus: true
 
         KeyNavigation.left: osdBar; KeyNavigation.right: osdBar

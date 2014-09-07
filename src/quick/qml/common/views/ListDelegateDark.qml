@@ -18,83 +18,69 @@
 
 import QtQuick 2.0
 
-import "../rectangles"
+Rectangle {
+    default property alias contents: content.children
+    property bool down: false
+    property bool hover: false
 
-Item {
-    property alias icon: buttonText.text
-    property alias iconColor: buttonText.color
-    property bool topMode: false
-    property bool standalone: false
-    property bool isLast: false
-    property bool isRight: false
+    width: 200
+    height: 50
+    color: "#0affffff"
+    border.width: 1
+    border.color: "#0d0e0f"
 
-    id: rectangle
+    Rectangle {
+        id: highlight
+        anchors.fill: parent
+        color: "#00ffffff"
+    }
 
-    height: TanoUi.osdRowHeight
-    width: height + (isLast ? 1 : 2)
-
-    OverlayDarkLineVertical {
+    Rectangle {
+        id: ribbon
         anchors {
             top: parent.top
             bottom: parent.bottom
             left: parent.left
-            topMargin: topMode ? 0 : -1
+            margins: 1
         }
-        hasLeft: !isLast
-        visible: isRight
-    }
 
-    OverlayDarkHighlight {
-        anchors {
-            fill: parent
-            topMargin: topMode ? 1 : 0
-            bottomMargin: (topMode && !standalone) ? 0 : 1
-            leftMargin: isRight ? (isLast ? 2 : 3) : 0
-            rightMargin: isRight ? 0 : (isLast ? 2 : 3)
-        }
+        width: 8
+        color: "#292c30"
 
         Rectangle {
-            id: highlight
             anchors.fill: parent
             color: "#00ffffff"
-        }
-
-        Text {
-            id: buttonText
-            anchors.fill: parent
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            font.pixelSize: 16
-            font.family: iconFont.name
+            border.width: 1
+            border.color: "#0affffff"
         }
     }
 
-    OverlayDarkLineVertical {
+    Rectangle {
         anchors {
             top: parent.top
             bottom: parent.bottom
-            right: parent.right
-            topMargin: topMode ? 0 : -1
+            left: ribbon.right
         }
-        hasRight: !isLast
-        visible: !isRight
+        color: "#0d0e0f"
+        width: 1
     }
 
-    MouseArea {
-        id: mouseArea
-        hoverEnabled: true
-        anchors.fill: parent
-
-        onClicked: {
-            //rectangle.forceActiveFocus()
-            console.log(buttonText.height, buttonText.width)
+    Rectangle {
+        id: content
+        anchors {
+            fill: parent
+            margins: 1
+            leftMargin: 10
         }
+        color: "#00ffffff"
+        border.width: 1
+        border.color: "#0affffff"
     }
 
     states: [
         State {
             name: "down"
-            when: mouseArea.pressedButtons & Qt.LeftButton
+            when: down
 
             PropertyChanges {
                 target: highlight
@@ -103,7 +89,7 @@ Item {
         },
         State {
             name: "hover"
-            when: mouseArea.containsMouse || rectangle.activeFocus
+            when: hover
 
             PropertyChanges {
                 target: highlight
