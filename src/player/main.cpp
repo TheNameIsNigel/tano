@@ -19,11 +19,12 @@
 //#include <QtCore/QtPlugin>
 
 //#include "widgets/application/TanoApplication.h"
-#include "quick/ApplicationWindow.h"
 
 #include <QtGui/QGuiApplication>
 
 #include <vlc-qt/QmlVideoPlayer.h>
+
+#include "ApplicationWindow.h"
 
 //Q_IMPORT_PLUGIN(TanoConfig)
 

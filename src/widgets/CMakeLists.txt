@@ -83,7 +83,7 @@ SET(Tano_Widgets_Common_Srcs
     common/Backend.cpp
     common/BrowseWidget.cpp
     common/DesktopShortcuts.cpp
-    common/FileDialogs.cpp
+    ../player/widgets/FileDialogs.cpp
     common/InfoBarWidget.cpp
     common/OsdFloat.cpp
     common/OsdWidget.cpp

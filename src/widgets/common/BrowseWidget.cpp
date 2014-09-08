@@ -28,7 +28,7 @@
     #include <QtGui/QToolButton>
 #endif
 
-#include "common/FileDialogs.h"
+#include "../player/widgets/FileDialogs.h"
 
 #include "BrowseWidget.h"
 

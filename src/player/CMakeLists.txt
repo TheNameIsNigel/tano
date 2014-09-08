@@ -31,8 +31,62 @@ SET(Tano_Logo
     ${CMAKE_SOURCE_DIR}/src/player/tano.png
 )
 
+SET(Tano_Quick_Qml
+    ../qml/main.qml
+
+    ../qml/common/buttons/OverlayDarkButton.qml
+    ../qml/common/rectangles/OverlayDark.qml
+    ../qml/common/rectangles/OverlayDarkHighlight.qml
+    ../qml/common/rectangles/OverlayDarkLineHorizontal.qml
+    ../qml/common/rectangles/OverlayDarkLineVertical.qml
+    ../qml/common/text/OverlayDarkText.qml
+    ../qml/common/views/ListDelegateDark.qml
+    ../qml/common/views/ScrollBar.qml
+
+    ../qml/fonts/fontawesome-webfont.js
+
+    ../qml/js/datetime.js
+
+    ../qml/menus/MainMenuBar.qml
+    ../qml/menus/MenuFile.qml
+    ../qml/menus/MenuPlayback.qml
+
+    ../qml/osd/OsdMain.qml
+    ../qml/osd/OsdNumber.qml
+    ../qml/osd/OsdTime.qml
+
+    ../qml/osd/bar/OsdBar.qml
+    ../qml/osd/bar/OsdButtons.qml
+    ../qml/osd/bar/OsdButtonsLeft.qml
+    ../qml/osd/bar/OsdButtonsRight.qml
+    ../qml/osd/bar/OsdSlider.qml
+
+    ../qml/osd/playlist/OsdPlaylist.qml
+    ../qml/osd/playlist/OsdPlaylistDelegate.qml
+
+    ../qml/player/PagePlayer.qml
+    ../qml/player/PlayerVideo.qml
+)
+
 SET(Tano_Srcs
     main.cpp
+
+    ApplicationWindow.cpp
+
+    common/ChannelSelect.cpp
+    common/Constants.cpp
+
+    elements/EpgElement.cpp
+    elements/PlaybackElement.cpp
+    elements/PlaylistElement.cpp
+
+    widgets/FileDialogs.cpp
+
+    ${Tano_Quick_Qml}
+)
+
+SET(Tano_Resources
+    ../qml/main.qrc
 
     ../../data/logo/logo.qrc
 )
@@ -59,13 +113,16 @@ INCLUDE_DIRECTORIES(
     ${CMAKE_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/src/core
-    ${CMAKE_SOURCE_DIR}/src/widgets
+    ${CMAKE_SOURCE_DIR}/src/player
     ${CMAKE_BINARY_DIR}
     ${CMAKE_BINARY_DIR}/src
 )
 
 # Include additional libraries
 INCLUDE_DIRECTORIES(${LIBVLCQT_INCLUDE_DIR})
+
+# Compile resources
+QT5_ADD_RESOURCES(Tano_Resources_Srcs ${Tano_Resources})
 
 # Compile resources with windres
 IF(MINGW)
@@ -84,8 +141,8 @@ IF(MSVC)
 ENDIF()
 
 # This line tells cmake to create the Tano program.
-ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE WIN32 ${Tano_Srcs})
-ADD_DEPENDENCIES(${PROJECT_NAME} ${TANO_CORE} ${TANO_QUICK} ${TANO_WIDGETS} ${TANO_CONFIG})
+ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE WIN32 ${Tano_Srcs} ${Tano_Resources_Srcs})
+ADD_DEPENDENCIES(${PROJECT_NAME} ${TANO_CORE} ${TANO_CONFIG})
 
 # MSVC: Avoid Debug/Release/... subfolders
 IF(MSVC)
@@ -112,14 +169,12 @@ IF(STATIC)
 ENDIF()
 
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-                      Qt5::Concurrent Qt5::Gui Qt5::Network Qt5::PrintSupport Qt5::Quick Qt5::Sql Qt5::Widgets Qt5::Xml
-                      ${TANO_CORE_LIB} ${TANO_QUICK_LIB} ${TANO_WIDGETS_LIB} ${TANO_CONFIG_LIB} ${LIBVLCQT_QML_LIBRARY})
+                      Qt5::Concurrent Qt5::Gui Qt5::Network Qt5::PrintSupport Qt5::Qml Qt5::Quick Qt5::Sql Qt5::Widgets Qt5::Xml
+                      ${TANO_CORE_LIB} ${TANO_CONFIG_LIB} ${LIBVLCQT_QML_LIBRARY})
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin" AND NOT STATIC)
     ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
         ${CMAKE_INSTALL_NAME_TOOL} -change ${TANO_CORE_LIB} "@loader_path/lib/${LIBSTART}${TANO_CORE}.${LIBEND}" $<TARGET_FILE:${PROJECT_NAME}>)
-    ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
-        ${CMAKE_INSTALL_NAME_TOOL} -change ${TANO_WIDGETS_LIB} "@loader_path/lib/${LIBSTART}${TANO_WIDGETS}.${LIBEND}" $<TARGET_FILE:${PROJECT_NAME}>)
 ENDIF()
 
 

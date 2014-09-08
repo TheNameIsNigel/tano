@@ -18,7 +18,7 @@
 
 #include <QtCore/QDir>
 
-#include "common/FileDialogs.h"
+#include "../player/widgets/FileDialogs.h"
 
 #include "PlaylistExportTvheadend.h"
 #include "ui_PlaylistExportTvheadend.h"

@@ -19,7 +19,7 @@
 #include "core/settings/SettingsChannel.h"
 
 #include "common/Backend.h"
-#include "common/FileDialogs.h"
+#include "../player/widgets/FileDialogs.h"
 #include "common/OsdWidget.h"
 #include "menu/MenuAspectRatio.h"
 #include "menu/MenuCropRatio.h"

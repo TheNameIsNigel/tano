@@ -23,10 +23,10 @@
 #include "core/playlist/PlaylistModel.h"
 #include "core/playlist/PlaylistUpdate.h"
 
-#include "widgets/common/FileDialogs.h"
-
 #include "common/ChannelSelect.h"
 #include "elements/PlaylistElement.h"
+
+#include "widgets/FileDialogs.h"
 
 PlaylistElement::PlaylistElement(const QString &defaultPlaylist,
                                  QObject *parent)

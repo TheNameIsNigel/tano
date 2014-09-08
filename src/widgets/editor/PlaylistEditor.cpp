@@ -32,7 +32,7 @@
 #include "core/playlist/PlaylistModel.h"
 #include "core/playlist/handlers/CSVHandler.h"
 
-#include "common/FileDialogs.h"
+#include "../player/widgets/FileDialogs.h"
 #include "editor/PlaylistEditorHelp.h"
 #include "editor/PlaylistEditorScan.h"
 #include "editor/PlaylistExportTvheadend.h"

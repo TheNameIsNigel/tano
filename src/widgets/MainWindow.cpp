@@ -61,7 +61,7 @@
 #include "application/Notifications.h"
 #include "common/Backend.h"
 #include "common/DesktopShortcuts.h"
-#include "common/FileDialogs.h"
+#include "../player/widgets/FileDialogs.h"
 #include "common/OsdFloat.h"
 #include "common/OsdWidget.h"
 #include "common/PlaylistDisplayWidget.h"
