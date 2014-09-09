@@ -22,7 +22,9 @@
 
 #include <QtGui/QGuiApplication>
 
-#include <vlc-qt/QmlVideoPlayer.h>
+#ifndef TANO_EXTERNAL_PLAYER
+    #include <vlc-qt/QmlVideoPlayer.h>
+#endif
 
 #include "ApplicationWindow.h"
 
@@ -32,7 +34,9 @@ int main(int argc, char *argv[])
 {
     //Q_INIT_RESOURCE(qml);
 
+#ifndef TANO_EXTERNAL_PLAYER
     qmlRegisterType<VlcQmlVideoPlayer>("VLCQt", 0, 9, "VlcVideoPlayer");
+#endif
 
     //if (!TanoApplication::preInit(argc, argv))
     //    return -10;
