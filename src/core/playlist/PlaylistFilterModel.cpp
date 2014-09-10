@@ -74,3 +74,18 @@ bool PlaylistFilterModel::filterAcceptsRow(int sourceRow,
 
     return name && category && language && type;
 }
+
+int PlaylistFilterModel::numberFromRow(int row)
+{
+    QModelIndex in = index(row, 0);
+
+    return data(in, Channel::NumberRole).toInt();
+}
+
+QVariant PlaylistFilterModel::dataFromRow(int row,
+                                          int role)
+{
+    QModelIndex in = index(row, 0);
+
+    return data(in, role);
+}

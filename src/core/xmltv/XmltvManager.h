@@ -46,6 +46,7 @@ public:
     QHash<QString, QString> channels() const;
 
 public slots:
+    void currentPlaylist();
     void request(const QString &id,
                  bool current = false);
     void requestProgramme(const QString &id);
@@ -70,7 +71,6 @@ signals:
 
 private slots:
     void current();
-    void currentPlaylist();
     void loadXmltv();
     void loadXmltvInit(QFile *file);
     void loadXmltvFinish();

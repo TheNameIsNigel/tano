@@ -32,6 +32,9 @@ public:
     explicit ApplicationWindow(QObject *parent = 0);
     virtual ~ApplicationWindow();
 
+public slots:
+    void completed();
+
 private:
     void createSettings();
     void createSettingsStartup();

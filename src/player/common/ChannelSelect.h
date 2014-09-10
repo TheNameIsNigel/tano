@@ -30,6 +30,7 @@ public:
 
 public slots:
     void process(int key);
+    void select(int channel);
 
     inline void back() { channel(false); }
     void channel(bool direction);

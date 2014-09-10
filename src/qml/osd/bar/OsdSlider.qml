@@ -19,7 +19,7 @@
 import QtQuick 2.0
 
 Rectangle {
-    property alias ratio: progress.width
+    property real ratio: 0
 
     width: 400
     height: TanoUi.osdProgressHeight
@@ -43,7 +43,7 @@ Rectangle {
 
     Rectangle {
         id: progress
-        width: 276
+        width: parent.width * ratio
         radius: TanoUi.osdProgressHeight / 2
         gradient: Gradient {
             GradientStop {

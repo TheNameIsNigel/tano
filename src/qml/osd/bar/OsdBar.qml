@@ -20,6 +20,9 @@ import QtQuick 2.1
 import QtQuick.Layouts 1.1
 
 import "../../common/rectangles"
+import "../../common/text"
+
+import "../../js/datetime.js" as TanoDate
 
 FocusScope {
     height: 2 * TanoUi.osdRowHeight + 5 * TanoUi.osdProgressHeight + 2 * 2 + 2 * TanoUi.osdTBMargin + 1
@@ -56,6 +59,15 @@ FocusScope {
                     margins: 1
                 }
                 width: height
+
+                Image {
+                    id: imageLogo
+                    anchors {
+                        fill: parent
+                        margins: 4
+                    }
+                    fillMode: Image.PreserveAspectFit
+                }
             }
 
             OverlayDarkLineVertical {
@@ -77,19 +89,16 @@ FocusScope {
                         rightMargin: 8
                     }
 
-                    Text {
+                    OverlayDarkText {
                         id: title
-                        color: "#ffffff"
-                        text: "POP TV HD"
                         font.pixelSize: 16
                         font.weight: Font.DemiBold
                     }
 
-                    Text {
+                    OverlayDarkText {
                         id: subtitle
-                        color: "#ffffff"
-                        text: "Game of Thrones"
                         font.pixelSize: 16
+                        Layout.fillWidth: true
                     }
                 }
 
@@ -116,10 +125,8 @@ FocusScope {
                             rightMargin: 8
                         }
 
-                        Text {
+                        OverlayDarkText {
                             id: timeStart
-                            color: "#ffffff"
-                            text: "00:00:00"
                             font.pixelSize: 13
                         }
 
@@ -128,10 +135,8 @@ FocusScope {
                             Layout.fillWidth: true
                         }
 
-                        Text {
+                        OverlayDarkText {
                             id: timeEnd
-                            color: "#ffffff"
-                            text: "01:12:12"
                             font.pixelSize: 13
                         }
                     }
@@ -169,7 +174,25 @@ FocusScope {
         }
     }
 
+    Connections {
+        target: TanoPlayback
+        onChannelInfo: {
+            title.text = name
+            imageLogo.source = logo
 
+            osdBar.focus = true
+        }
+    }
+
+    Connections {
+        target: TanoXmltv
+        onCurrent: {
+            subtitle.text = epg[1]
+            timeStart.text = TanoDate.displayTime(new Date(epg[2] * 1000))
+            timeEnd.text = TanoDate.displayTime(new Date(epg[3] * 1000))
+            slider.ratio = (new Date().getTime() - new Date(epg[2] * 1000).getTime()) / (new Date(epg[3] * 1000).getTime() - new Date(epg[2] * 1000).getTime())
+        }
+    }
 
     states: State {
         name: "osdOpen"

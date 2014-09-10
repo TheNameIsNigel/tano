@@ -105,10 +105,21 @@ void ApplicationWindow::createModels()
     rootContext()->setContextProperty("TanoPlaylist", _playlist->model());
     rootContext()->setContextProperty("TanoChannelSelect", _playlist->select());
 
+    rootContext()->setContextProperty("TanoXmltv", _epg->xmltv());
+
     _playback = new PlaybackElement(this);
     _playback->setXmltv(_epg->xmltv());
     rootContext()->setContextProperty("TanoPlayback", _playback);
 
     connect(_playlist, SIGNAL(itemSelected(Channel *)), _playback, SLOT(playChannel(Channel *)));
     connect(_epg->xmltv(), SIGNAL(currentPlaylist(QString, QString, QString)), _playlist->sourceModel(), SLOT(updateCurrentEpg(QString, QString, QString)));
+
+    rootContext()->setContextProperty("Tano", this);
+}
+
+void ApplicationWindow::completed()
+{
+    _epg->xmltv()->currentPlaylist();
+
+    _playlist->select()->select(1);
 }

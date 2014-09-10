@@ -291,14 +291,16 @@ XmltvProgramme *XmltvSql::programmeCurrent(const QString &id)
 
 QStringList XmltvSql::programmeCurrentDisplay(const QString &id)
 {
-    QString output = "<a href=\"%1\">%2 - %3</a>";
     QStringList epg;
     int c = 0;
 
     QSqlQuery q = query();
     q.exec("SELECT * FROM `programmes` WHERE `channel` = '" + id + "' AND `stop` > " + QString::number(QDateTime::currentDateTime().toTime_t()) + " ORDER BY `start`");
     while (q.next() && c < 2) {
-        epg << output.arg(q.value(0).toString(), QDateTime::fromTime_t(q.value(4).toInt()).toString(Tano::Xmltv::timeFormatDisplay()), q.value(1).toString());
+        epg << q.value(0).toString()
+            << q.value(1).toString()
+            << q.value(4).toString()
+            << q.value(5).toString();
         c++;
     }
 

@@ -47,11 +47,9 @@ void PlaybackElement::playChannel(Channel *channel)
     QString url = _udpxy->processUrl(_channel->url());
 
     emit playUrl(url);
+    emit channelInfo(_channel->name(), _channel->logo());
 
     _xmltv->request(_channel->xmltvId(), true);
-
-    //_mediaPlayer->osd()->setChannel(_channel->number(), _channel->name(), _channel->language());
-    //_mediaPlayer->osd()->setLogo(_channel->logo());
 
     //tooltip(_channel->name());
 }

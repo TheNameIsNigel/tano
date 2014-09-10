@@ -39,6 +39,8 @@ public slots:
     void stop();
 
 signals:
+    void channelInfo(const QString &name,
+                     const QString &logo);
     void playUrl(const QString &url);
 
 private:

@@ -72,4 +72,6 @@ ApplicationWindow {
             focus: true
         }
     }
+
+    Component.onCompleted: Tano.completed()
 }

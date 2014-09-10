@@ -47,10 +47,14 @@ public:
     inline QList<Channel::Type> types() const { return _types; }
     void setTypes(const QList<Channel::Type> &types);
 
+    Q_INVOKABLE int numberFromRow(int row);
+
 protected:
     bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const;
 
 private:
+    QVariant dataFromRow(int row, int role);
+
     QString _category;
     QString _language;
     QList<Channel::Type> _types;

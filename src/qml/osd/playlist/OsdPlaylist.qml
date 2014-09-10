@@ -47,7 +47,7 @@ FocusScope {
 
         KeyNavigation.left: osdBar; KeyNavigation.right: osdBar
 
-        Keys.onReturnPressed: console.log('Selected channel: ' + currentIndex)
+        Keys.onReturnPressed: TanoChannelSelect.select(model.numberFromRow(currentIndex))
     }
 
     ScrollBar {

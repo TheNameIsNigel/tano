@@ -62,11 +62,19 @@ void ChannelSelect::process(int key)
     }
 }
 
+void ChannelSelect::select(int channel)
+{
+    _full = channel;
+
+    display();
+}
+
 void ChannelSelect::display()
 {
     if(_channels.contains(_full)) {
         _current = _full;
-        emit channelSelect(_full);
+        emit channelSelect(_current);
+        emit displayNumber(_current);
     } else {
         emit displayNumber(_current);
     }

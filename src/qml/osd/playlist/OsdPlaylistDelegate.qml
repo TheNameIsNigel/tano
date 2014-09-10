@@ -109,12 +109,8 @@ ListDelegateDark {
             osdPlaylistDelegate.forceActiveFocus()
         }
 
-        /*onExited: {
-            osdPlaylistDelegate.ListView.view.currentIndex = -1
-        }*/
-
         onClicked: {
-            console.log('Selected channel: ' + model.name)
+            TanoChannelSelect.select(model.number)
         }
     }
 }
