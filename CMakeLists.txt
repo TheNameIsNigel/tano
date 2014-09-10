@@ -187,6 +187,8 @@ IF(BUILD_PLAYER AND NOT EXTERNAL_PLAYER)
     IF(STATIC)
         FIND_PACKAGE(LIBVLC REQUIRED)
     ENDIF()
+ELSEIF(BUILD_PLAYER)
+    FIND_PACKAGE(QMR REQUIRED)
 ENDIF()
 
 # Set Qt bin dir to find QtCoreX.dll and other libs to install

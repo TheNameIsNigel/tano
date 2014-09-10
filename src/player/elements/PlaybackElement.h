@@ -21,6 +21,8 @@
 
 #include <QtCore/QObject>
 
+class QMRRemote;
+
 class Channel;
 class NetworkUdpxy;
 class XmltvManager;
@@ -48,6 +50,8 @@ private:
     NetworkUdpxy *_udpxy;
 
     XmltvManager *_xmltv;
+
+    QMRRemote *_remote;
 };
 
 #endif // TANO_PLAYBACKELEMENT_H_

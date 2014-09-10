@@ -16,6 +16,9 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
+#include <qmediaremote/Enums.h>
+#include <qmediaremote/Remote.h>
+
 #include "core/network/NetworkUdpxy.h"
 #include "core/playlist/containers/Channel.h"
 #include "core/xmltv/XmltvManager.h"
@@ -24,7 +27,8 @@
 
 PlaybackElement::PlaybackElement(QObject *parent)
     : QObject(parent),
-      _udpxy(new NetworkUdpxy(true, this))
+      _udpxy(new NetworkUdpxy(true, this)),
+      _remote(0)
 {
 
 }
@@ -42,6 +46,8 @@ void PlaybackElement::setXmltv(XmltvManager *xmltv)
 // Playback
 void PlaybackElement::playChannel(Channel *channel)
 {
+    stop();
+
     _channel = channel;
 
     QString url = _udpxy->processUrl(_channel->url());
@@ -52,6 +58,12 @@ void PlaybackElement::playChannel(Channel *channel)
     _xmltv->request(_channel->xmltvId(), true);
 
     //tooltip(_channel->name());
+
+    if (!_remote) {
+        _remote = new QMRRemote(QMR::VLC, this);
+    }
+
+    _remote->start(QStringList() << "-v");
 }
 
 void PlaybackElement::stop()

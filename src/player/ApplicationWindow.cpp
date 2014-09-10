@@ -41,7 +41,7 @@ ApplicationWindow::ApplicationWindow(QObject *parent)
     createCommonConstants();
     createModels();
 
-    load(QUrl(QStringLiteral("/Users/tadej/workspace/tanoprojects/tano/src/qml/main.qml"))); //"qrc:/main.qml")));
+    load(QUrl(QStringLiteral("/home/tadej/workspace/tanoprojects/tano/src/qml/main.qml"))); //"qrc:/main.qml")));
 }
 
 ApplicationWindow::~ApplicationWindow()
