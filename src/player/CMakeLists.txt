@@ -34,13 +34,17 @@ SET(Tano_Logo
 SET(Tano_Quick_Qml
     ../qml/main.qml
 
+    ../qml/common/buttons/NavigationButton.qml
     ../qml/common/buttons/OverlayDarkButton.qml
+    ../qml/common/rectangles/NavigationOverlay.qml
     ../qml/common/rectangles/OverlayDark.qml
     ../qml/common/rectangles/OverlayDarkHighlight.qml
     ../qml/common/rectangles/OverlayDarkLineHorizontal.qml
     ../qml/common/rectangles/OverlayDarkLineVertical.qml
+    ../qml/common/text/MainText.qml
     ../qml/common/text/OverlayDarkText.qml
     ../qml/common/views/ListDelegateDark.qml
+    ../qml/common/views/ListDelegateMain.qml
     ../qml/common/views/ScrollBar.qml
 
     ../qml/fonts/fontawesome-webfont.js
@@ -63,6 +67,16 @@ SET(Tano_Quick_Qml
 
     ../qml/osd/playlist/OsdPlaylist.qml
     ../qml/osd/playlist/OsdPlaylistDelegate.qml
+
+    ../qml/pages/Navigation.qml
+    ../qml/pages/NavigationModel.qml
+    ../qml/pages/NavigationStack.qml
+    ../qml/pages/PageChannels.qml
+    ../qml/pages/PageHome.qml
+    ../qml/pages/PageSchedule.qml
+
+    ../qml/pages/playlist/MainPlaylist.qml
+    ../qml/pages/playlist/MainPlaylistDelegate.qml
 
     ../qml/player/PagePlayer.qml
     ../qml/player/PlayerVideo.qml

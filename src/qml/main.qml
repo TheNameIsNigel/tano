@@ -21,6 +21,7 @@ import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.1
 
 import "menus"
+import "pages"
 import "player"
 
 ApplicationWindow {
@@ -28,6 +29,8 @@ ApplicationWindow {
     visible: true
     width: 854
     height: 480
+
+    //color: "#00000000"
 
     minimumHeight: 360
     minimumWidth: 756
@@ -53,7 +56,7 @@ ApplicationWindow {
         anchors.fill: parent
         hoverEnabled: true
         onPositionChanged: {
-            if (!osd.visible) {
+            if (pagePlayer.visible && !osd.visible) {
                 osd.visible = true
                 osd.focus = true
                 //mouseTimer.start()
@@ -65,11 +68,34 @@ ApplicationWindow {
         anchors.fill: parent
         focus: true
 
+        Navigation {
+            id: navigation
+
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
+            }
+
+            focus: true
+        }
+
+        NavigationStack {
+            id: navigationStack
+
+            anchors {
+                top: navigation.bottom
+                bottom: parent.bottom
+                left: parent.left
+                right: parent.right
+            }
+        }
+
         PagePlayer {
             id: pagePlayer
             anchors.fill: parent
-
-            focus: true
+            visible: false
+            //focus: true
         }
     }
 
