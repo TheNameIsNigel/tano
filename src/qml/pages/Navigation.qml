@@ -18,7 +18,7 @@
 
 import QtQuick 2.1
 
-import "../fonts/fontawesome-webfont.js" as FontAwesome
+import "../fonts/IcoMoon/icomoon.js" as IconFont
 
 import "../common/buttons"
 
@@ -48,7 +48,7 @@ FocusScope {
 
         spacing: 8
         delegate: NavigationButton {
-            icon: FontAwesome.Icon[model.icon]
+            icon: IconFont.Icon[model.icon]
         }
     }
 }

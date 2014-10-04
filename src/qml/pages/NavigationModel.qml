@@ -20,12 +20,12 @@ import QtQuick 2.0
 
 ListModel {
     ListElement {
-        icon: "Home"
+        icon: "home"
     }
     ListElement {
-        icon: "ListUl"
+        icon: "tv"
     }
     ListElement {
-        icon: "Calendar"
+        icon: "calendar"
     }
 }

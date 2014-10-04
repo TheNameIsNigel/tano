@@ -18,7 +18,7 @@
 
 import QtQuick 2.1
 
-import "../../fonts/fontawesome-webfont.js" as FontAwesome
+import "../../fonts/IcoMoon/icomoon.js" as IconFont
 
 import "../../common/buttons"
 
@@ -43,7 +43,7 @@ FocusScope {
         KeyNavigation.down: osdPlaylist
 
         delegate: OverlayDarkButton {
-            icon: FontAwesome.Icon[model.icon]
+            icon: IconFont.Icon[model.icon]
             iconColor: model.color
             isLast: scope.isRight ? (model.index === 0) : (model.index === view.model.count - 1)
             isRight: scope.isRight

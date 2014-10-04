@@ -48,7 +48,7 @@ SET(Tano_Quick_Qml
     ../qml/common/views/ListDelegateMain.qml
     ../qml/common/views/ScrollBar.qml
 
-    ../qml/fonts/fontawesome-webfont.js
+    ../qml/fonts/icomoon/icomoon.js
 
     ../qml/js/datetime.js
 

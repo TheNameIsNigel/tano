@@ -22,7 +22,7 @@ import QtQuick.Layouts 1.1
 import "../common/buttons"
 import "../common/rectangles"
 
-import "../fonts/fontawesome-webfont.js" as FontAwesome
+import "../fonts/IcoMoon/icomoon.js" as IconFont
 
 OverlayDark {
     height: TanoUi.osdRowHeight
@@ -37,7 +37,7 @@ OverlayDark {
         spacing: 0
 
         OverlayDarkButton {
-            icon: FontAwesome.Icon["Home"]
+            icon: IconFont.Icon["home"]
             iconColor: "#ffffff"
             isLast: true
             topMode: true

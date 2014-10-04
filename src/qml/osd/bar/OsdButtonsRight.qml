@@ -20,11 +20,11 @@ import QtQuick 2.0
 
 ListModel {
     ListElement {
-        icon: "Play"
+        icon: "play3"
         color: "#ffffff"
     }
     ListElement {
-        icon: "Stop"
+        icon: "stop2"
         color: "#ffffff"
     }
 }

@@ -52,10 +52,10 @@ ApplicationWindow {
         source: "fonts/Open_Sans/OpenSans-Bold.ttf"
     }
 
-    // Load the "FontAwesome" font for the monochrome icons.
+    // Load the "icomoon" font for the monochrome icons.
     FontLoader {
         id: iconFont
-        source: "fonts/fontawesome-webfont.ttf"
+        source: "fonts/IcoMoon/icomoon.ttf"
     }
 
     menuBar: MainMenuBar { }
