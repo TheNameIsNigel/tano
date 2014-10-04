@@ -38,6 +38,20 @@ ApplicationWindow {
     property QtObject osd: null
     property QtObject player: null
 
+    // Load the "OpenSans" fonts
+    FontLoader {
+        id: mainFontRegular
+        source: "fonts/Open_Sans/OpenSans-Regular.ttf"
+    }
+    FontLoader {
+        id: mainFontSemibold
+        source: "fonts/Open_Sans/OpenSans-Semibold.ttf"
+    }
+    FontLoader {
+        id: mainFontBold
+        source: "fonts/Open_Sans/OpenSans-Bold.ttf"
+    }
+
     // Load the "FontAwesome" font for the monochrome icons.
     FontLoader {
         id: iconFont

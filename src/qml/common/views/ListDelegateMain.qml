@@ -18,6 +18,8 @@
 
 import QtQuick 2.0
 
+import "../text"
+
 Rectangle {
     default property alias contents: content.children
     property bool hover: false
@@ -39,7 +41,7 @@ Rectangle {
         width: height
         color: "#D3D3D3"
 
-        Text {
+        CoreText {
             anchors.fill: parent
             text: value
             color: "#FFFFFF"

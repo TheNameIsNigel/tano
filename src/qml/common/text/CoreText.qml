@@ -18,8 +18,6 @@
 
 import QtQuick 2.0
 
-CoreText {
-    color: "#494949"
-    /*style: Text.Raised
-    styleColor: "#191a1b"*/
+Text {
+    font.family: mainFontRegular.name
 }

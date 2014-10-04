@@ -18,7 +18,7 @@
 
 import QtQuick 2.0
 
-Text {
+CoreText {
     color: "#dbdbdb"
     style: Text.Raised
     styleColor: "#191a1b"

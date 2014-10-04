@@ -41,6 +41,7 @@ SET(Tano_Quick_Qml
     ../qml/common/rectangles/OverlayDarkHighlight.qml
     ../qml/common/rectangles/OverlayDarkLineHorizontal.qml
     ../qml/common/rectangles/OverlayDarkLineVertical.qml
+    ../qml/common/text/CoreText.qml
     ../qml/common/text/MainText.qml
     ../qml/common/text/OverlayDarkText.qml
     ../qml/common/views/ListDelegateDark.qml
