@@ -22,13 +22,13 @@ import "../text"
 
 Rectangle {
     default property alias contents: content.children
+    property bool down: false
     property bool hover: false
-    property string value: ""
     property int index: 1
 
     height: 58
     width: 358
-    color: index % 2 ? "#F5F5F5" : "#EFEFEF"
+    color: index % 2 ? "#DDF4F4F4" : "#DDE9E9E9"
 
     Rectangle {
         id: ribbon
@@ -38,29 +38,28 @@ Rectangle {
             left: parent.left
         }
 
-        width: height
+        width: TanoUi.listRibbonSize
         color: "#D3D3D3"
-
-        CoreText {
-            anchors.fill: parent
-            text: value
-            color: "#FFFFFF"
-            font.pixelSize: 18
-            font.weight: Font.Bold
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-        }
     }
 
     Item {
         id: content
         anchors {
             fill: parent
-            leftMargin: height
+            leftMargin: TanoUi.listRibbonSize
         }
     }
 
     states: [
+        State {
+            name: "down"
+            when: down
+
+            PropertyChanges {
+                target: ribbon
+                color: "#979797"
+            }
+        },
         State {
             name: "hover"
             when: hover

@@ -16,35 +16,40 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.1
+import QtQuick.Layouts 1.1
 
-import "../../common/rectangles"
-import "../../common/views"
+import "../common/rectangles"
+import "../common/text"
+import "../common/views"
 
-FocusScope {
-    GridView {
-        id: listView
-        clip: true
+ListDelegateMain {
+    id: mainPlaylistDelegate
 
-        anchors.fill: parent
+    down: mouseArea.pressedButtons & Qt.LeftButton
+    hover: mouseArea.containsMouse || mainPlaylistDelegate.activeFocus
+    index: model.index
 
-        cellHeight: 58
-        cellWidth: 358
+    PlaylistLayout {
 
-        model: TanoPlaylist
-        delegate: MainPlaylistDelegate { }
-        focus: true
-
-        flow: GridView.FlowTopToBottom
-        flickableDirection: Flickable.HorizontalFlick
-
-       // KeyNavigation.left: osdBar; KeyNavigation.right: osdBar
-
-        //Keys.onReturnPressed: TanoChannelSelect.select(model.numberFromRow(currentIndex))
     }
 
-    ScrollBar {
-        flickable: listView
-        anchors.leftMargin: 3
+    MouseArea {
+        id: mouseArea
+        anchors {
+            fill: parent
+            leftMargin: -parent.height
+        }
+
+        hoverEnabled: mainPlaylistDelegate.GridView.view.horizontalVelocity === 0
+
+        onEntered: {
+            mainPlaylistDelegate.GridView.view.currentIndex = index
+            mainPlaylistDelegate.forceActiveFocus()
+        }
+
+        onClicked: {
+            //TanoChannelSelect.select(model.number)
+        }
     }
 }

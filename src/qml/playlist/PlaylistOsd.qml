@@ -17,29 +17,49 @@
 *****************************************************************************/
 
 import QtQuick 2.0
-import QtQml 2.0
 
 import "../common/rectangles"
+import "../common/views"
 
-import "../js/datetime.js" as TanoDate
+FocusScope {
+    width: 318; height: 200
 
-OverlayLight {
-    height: TanoUi.osdRowHeight
-    width: 100
+    anchors.left: parent.right
+    anchors.leftMargin: 0
 
-    Text {
-        id: timeText
+    OverlayLight {
         anchors.fill: parent
-        color: "#ffffff"
-        text: "22:22"
-        font.pixelSize: 16
-        font.weight: Font.DemiBold
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
     }
 
-    Timer {
-        interval: 500; running: true; repeat: true; triggeredOnStart: true
-        onTriggered: timeText.text = TanoDate.getCurrentTime()
+    ListView {
+        id: listView
+        clip: true
+
+        anchors {
+            fill: parent
+            rightMargin: 18
+        }
+
+        model: TanoPlaylist
+        delegate: PlaylistOsdDelegate { }
+        focus: true
+
+        KeyNavigation.left: osdBar; KeyNavigation.right: osdBar
+
+        Keys.onReturnPressed: TanoChannelSelect.select(model.numberFromRow(currentIndex))
+    }
+
+    ScrollBarVertical {
+        flickable: listView
+    }
+
+    states: State {
+        name: "playlistOpen"
+        when: !osdBar.activeFocus
+        PropertyChanges { target: osdPlaylist; anchors.leftMargin: -width }
+    }
+
+    transitions: Transition {
+        NumberAnimation { properties: "anchors.leftMargin"; duration: 600; easing.type: Easing.OutQuint }
     }
 }

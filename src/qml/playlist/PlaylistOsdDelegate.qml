@@ -19,52 +19,21 @@
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
 
-import "../../common/rectangles"
-import "../../common/text"
-import "../../common/views"
+import "../common/rectangles"
+import "../common/text"
+import "../common/views"
 
 ListDelegateMain {
     id: mainPlaylistDelegate
 
+    width: 300
+
+    down: mouseArea.pressedButtons & Qt.LeftButton
     hover: mouseArea.containsMouse || mainPlaylistDelegate.activeFocus
     index: model.index
-    value: model.number
 
-    Item {
-        id: imageContainer
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
-            left: parent.left
-        }
+    PlaylistLayout {
 
-        width: parent.height
-
-        Image {
-            id: image
-            anchors {
-                fill: parent
-                margins: 4
-            }
-            fillMode: Image.PreserveAspectFit
-            source: model.logo
-        }
-    }
-
-    MainText {
-        id: textName
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
-            left: imageContainer.right
-            right: parent.right
-            rightMargin: 4
-        }
-
-        text: model.name
-        font.pointSize: 16
-        elide: Text.ElideRight
-        verticalAlignment: Text.AlignVCenter
     }
 
     MouseArea {
@@ -74,10 +43,10 @@ ListDelegateMain {
             leftMargin: -parent.height
         }
 
-        hoverEnabled: mainPlaylistDelegate.GridView.view.horizontalVelocity === 0
+        hoverEnabled: mainPlaylistDelegate.ListView.view.horizontalVelocity === 0
 
         onEntered: {
-            mainPlaylistDelegate.GridView.view.currentIndex = index
+            mainPlaylistDelegate.ListView.view.currentIndex = index
             mainPlaylistDelegate.forceActiveFocus()
         }
 

@@ -108,8 +108,8 @@ ApplicationWindow {
         PagePlayer {
             id: pagePlayer
             anchors.fill: parent
-            visible: false
-            //focus: true
+            //visible: false
+            focus: true
         }
     }
 

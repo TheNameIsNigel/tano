@@ -19,11 +19,10 @@
 import QtQuick 2.0
 
 import "../osd"
-import "playlist"
+import "../playlist"
 
 Rectangle {
-
-    MainPlaylist {
+    PlaylistMain {
         anchors.fill: parent
     }
 }

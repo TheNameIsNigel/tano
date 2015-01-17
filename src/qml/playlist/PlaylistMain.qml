@@ -18,50 +18,33 @@
 
 import QtQuick 2.0
 
-import "../../common/rectangles"
-import "../../common/views"
+import "../common/rectangles"
+import "../common/views"
 
 FocusScope {
-    width: 350; height: 200
-
-    anchors.left: parent.right
-    anchors.leftMargin: 0
-
-    OverlayDark {
-        anchors.fill: parent
-    }
-
-    ListView {
+    GridView {
         id: listView
         clip: true
 
-        anchors {
-            fill: parent
-            margins: 25
-        }
+        anchors.fill: parent
+
+        cellHeight: 58
+        cellWidth: 358
 
         model: TanoPlaylist
-        delegate: OsdPlaylistDelegate { }
-        spacing: -1
+        delegate: PlaylistMainDelegate { }
         focus: true
 
-        KeyNavigation.left: osdBar; KeyNavigation.right: osdBar
+        flow: GridView.FlowTopToBottom
+        flickableDirection: Flickable.HorizontalFlick
 
-        Keys.onReturnPressed: TanoChannelSelect.select(model.numberFromRow(currentIndex))
+       // KeyNavigation.left: osdBar; KeyNavigation.right: osdBar
+
+        //Keys.onReturnPressed: TanoChannelSelect.select(model.numberFromRow(currentIndex))
     }
 
-    ScrollBar {
-        flickable: listView
-        anchors.leftMargin: 3
-    }
-
-    states: State {
-        name: "playlistOpen"
-        when: !osdBar.activeFocus
-        PropertyChanges { target: osdPlaylist; anchors.leftMargin: -width }
-    }
-
-    transitions: Transition {
-        NumberAnimation { properties: "anchors.leftMargin"; duration: 600; easing.type: Easing.OutQuint }
-    }
+//    ScrollBar {
+//        flickable: listView
+//        anchors.leftMargin: 3
+//    }
 }

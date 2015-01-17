@@ -38,7 +38,7 @@ FocusScope {
 
     property bool enabled: false
 
-    OverlayDark {
+    OverlayLight {
         anchors {
             fill: parent
             leftMargin: TanoUi.osdLRMargin

@@ -19,7 +19,7 @@
 import QtQuick 2.0
 
 import "bar"
-import "playlist"
+import "../playlist"
 
 FocusScope {
     id: mainOsd
@@ -52,7 +52,7 @@ FocusScope {
         focus: true
     }
 
-    OsdPlaylist {
+    PlaylistOsd {
         id: osdPlaylist
 
         anchors.top: parent.top
@@ -61,6 +61,7 @@ FocusScope {
 
     OsdNumber {
         id: osdNumber
+        visible: false
 
         anchors {
             left: parent.left
@@ -72,6 +73,7 @@ FocusScope {
 
     OsdTime {
         id: osdTime
+        visible: false
 
         anchors {
             right: parent.right

@@ -37,16 +37,16 @@ SET(Tano_Quick_Qml
     ../qml/common/buttons/NavigationButton.qml
     ../qml/common/buttons/OverlayDarkButton.qml
     ../qml/common/rectangles/NavigationOverlay.qml
-    ../qml/common/rectangles/OverlayDark.qml
+    ../qml/common/rectangles/OverlayLight.qml
     ../qml/common/rectangles/OverlayDarkHighlight.qml
     ../qml/common/rectangles/OverlayDarkLineHorizontal.qml
     ../qml/common/rectangles/OverlayDarkLineVertical.qml
     ../qml/common/text/CoreText.qml
     ../qml/common/text/MainText.qml
     ../qml/common/text/OverlayDarkText.qml
-    ../qml/common/views/ListDelegateDark.qml
     ../qml/common/views/ListDelegateMain.qml
-    ../qml/common/views/ScrollBar.qml
+    ../qml/common/views/ScrollBarCommon.qml
+    ../qml/common/views/ScrollBarVertical.qml
 
     ../qml/fonts/icomoon/icomoon.js
 
@@ -66,9 +66,6 @@ SET(Tano_Quick_Qml
     ../qml/osd/bar/OsdButtonsRight.qml
     ../qml/osd/bar/OsdSlider.qml
 
-    ../qml/osd/playlist/OsdPlaylist.qml
-    ../qml/osd/playlist/OsdPlaylistDelegate.qml
-
     ../qml/pages/Navigation.qml
     ../qml/pages/NavigationModel.qml
     ../qml/pages/NavigationStack.qml
@@ -76,8 +73,11 @@ SET(Tano_Quick_Qml
     ../qml/pages/PageHome.qml
     ../qml/pages/PageSchedule.qml
 
-    ../qml/pages/playlist/MainPlaylist.qml
-    ../qml/pages/playlist/MainPlaylistDelegate.qml
+    ../qml/playlist/PlaylistLayout.qml
+    ../qml/playlist/PlaylistMain.qml
+    ../qml/playlist/PlaylistMainDelegate.qml
+    ../qml/playlist/PlaylistOsd.qml
+    ../qml/playlist/PlaylistOsdDelegate.qml
 
     ../qml/player/PagePlayer.qml
     ../qml/player/PlayerVideo.qml

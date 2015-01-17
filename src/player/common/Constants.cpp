@@ -33,8 +33,15 @@ QQmlPropertyMap *Tano::Quick::ui()
 {
     QQmlPropertyMap *uiConstantsData = new QQmlPropertyMap();
     // Colors
-    uiConstantsData->insert("colorBlurBg", "#80232323");
-    uiConstantsData->insert("colorBlurBgDark", "#d0232323");
+    uiConstantsData->insert("bgMain", "#F4F4F4");
+
+
+
+    //uiConstantsData->insert("colorBlurBg", "#80232323");
+    //uiConstantsData->insert("colorBlurBgDark", "#d0232323");
+
+    // Main UI
+    uiConstantsData->insert("listRibbonSize", 6);
 
     // OSD
     uiConstantsData->insert("osdRowHeight", 42);

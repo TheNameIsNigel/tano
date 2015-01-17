@@ -21,8 +21,5 @@ import QtQuick 2.0
 Rectangle {
     width: 100
     height: 50
-    color: "#f3171819"
-    radius: 2
-    border.width: 1
-    border.color: "#f3232325"
+    color: "#99F4F4F4"
 }

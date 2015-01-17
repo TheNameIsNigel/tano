@@ -24,7 +24,7 @@ import "../common/rectangles"
 
 import "../fonts/IcoMoon/icomoon.js" as IconFont
 
-OverlayDark {
+OverlayLight {
     height: TanoUi.osdRowHeight
     width: 100
 
